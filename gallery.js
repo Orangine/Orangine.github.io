@@ -30,7 +30,7 @@ async function loadImagesFromJson() {
       // Cria o elemento de descrição e o adiciona à lista
       const description = document.createElement("div");
       description.classList.add("image-description");
-      description.innerHTML = `<div>${image.game}</div><div>Por: ${image.author}</div>`;
+      description.innerHTML = `<div>${image.game}</div><div>Por ${image.author}</div>`;
       li.appendChild(description);
 
       if (index === 0 && isPortrait(image)) {
@@ -92,7 +92,7 @@ function openModal(imgSrc, imgAlt, imgDescription) {
   modal.style.display = "block";
   modalImg.src = imgSrc;
   modalImg.alt = imgAlt;
-  captionText.innerHTML = imgDescription;
+  captionText.innerHTML = `${imgAlt}<br>Por ${imgDescription}`;
 
   // Atualiza o fundo principal com o URL da última imagem vista no modal
   document.getElementById("main-background").style.backgroundImage = `url('${imgSrc}')`;
