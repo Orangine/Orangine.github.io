@@ -35,6 +35,7 @@ body {
 .logo {
   height: 50px; /* Ajuste a altura conforme necessário */
   margin-right: 5px; /* Espaço entre a logo e o nome */
+  cursor: pointer;
 }
 
 .site-name {
