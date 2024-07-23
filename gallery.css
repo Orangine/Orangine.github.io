@@ -9,6 +9,7 @@ body {
 }
 
 /* Barra de Navegação */
+/* Barra de Navegação */
 .navbar {
   position: absolute;
   top: 0;
@@ -20,11 +21,31 @@ body {
   padding: 1px;
   font-family: 'Lexend', sans-serif;
   box-shadow: 0px 2px 1px rgba(10, 10, 10, 0.2);
+  display: flex;
+  align-items: center; /* Alinha verticalmente os itens */
 }
 
+.logo-container {
+  display: flex;
+  align-items: center; /* Alinha verticalmente a logo e o nome */
+  margin-right: auto; /* Empurra o contêiner da logo para a esquerda */
+  padding: 0 1px;
+}
+
+.logo {
+  height: 50px; /* Ajuste a altura conforme necessário */
+  margin-right: 5px; /* Espaço entre a logo e o nome */
+}
+
+.site-name {
+  font-size: 20px; /* Ajuste o tamanho da fonte conforme necessário */
+  font-weight: bold;
+}
+
+/* Estilos existentes para os links da navbar */
 .navbar a {
-  float: left;
   display: block;
+  float: left;
   color: #b0b0b0;
   text-align: center;
   padding: 5px 20px;
@@ -37,6 +58,7 @@ body {
   margin-bottom: 10px;
   cursor: pointer;
 }
+
 
 .navbar a.active {
   background-color: #ffffff;

@@ -280,3 +280,7 @@ function setGridView(view) {
 document.addEventListener("DOMContentLoaded", function() {
   setGridView('default');
 });
+
+document.getElementById('logo').addEventListener('click', function() {
+  window.location.href = 'https://orangine.github.io'; // Substitua pelo URL desejado
+});
