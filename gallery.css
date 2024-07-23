@@ -19,6 +19,8 @@ body {
   background-color: rgb(15, 15, 15);
   color: #fff;
   padding: 1px;
+  padding-bottom: 5px;
+  padding-top: 5px;
   font-family: 'Lexend', sans-serif;
   box-shadow: 0px 2px 1px rgba(10, 10, 10, 0.2);
   display: flex;
@@ -29,7 +31,7 @@ body {
   display: flex;
   align-items: center; /* Alinha verticalmente a logo e o nome */
   margin-right: auto; /* Empurra o contêiner da logo para a esquerda */
-  padding: 0 1px;
+  padding: 0 5px;
 }
 
 .logo {
@@ -95,7 +97,7 @@ body {
 
 .clear-search {
   position: absolute;
-  top: 26px;
+  top: 31px;
   right: 35px;
   transform: translateY(-50%);
   cursor: pointer;
