@@ -1,52 +1,38 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pixel Memories</title>
-<link rel="icon" href="logo.png" type="image/x-icon">
-<link rel="stylesheet" href="gallery.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Memories</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="main-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-  <div class="navbar">
-    <div class="logo-container">
-        <img src="logo.png" alt="Logo" class="logo" id="logo"> <!-- Substitua "logo.png" pelo caminho da sua logo -->
-        <span class="site-name">PIXEL <br> MEMORIES</span>
-    </div>
-
-    <a class="active" onclick="showAll()" data-nav="all">Todas</a>
-    <a onclick="showLandscape()" data-nav="landscape">Paisagem</a>
-    <a onclick="showPortrait()" data-nav="portrait">Retrato</a>
-
-    <!-- Ícones para alternar a visualização -->
-    <div class="view-toggle-icons">
-      <i class="fas fa-list" onclick="setGridView('default')"></i>
-      <i class="fas fa-th" onclick="setGridView('square')"></i>
-  </div>
-
-    <div class="search-bar">
-        <input type="text" id="searchInput" oninput="searchImages()" placeholder="Pesquisar por jogo...">
-        <span id="clearSearch" class="clear-search">&#10006;</span>
-    </div>
-</div>
-
-<div id="suggestions" class="suggestions"></div>
-
-<ul class="image-gallery" id="imgur-album"></ul>
-
-<div id="modal" class="modal">
-  <span class="close" onclick="closeModal()">&times;</span>
-  <span class="fullscreen" onclick="openFullscreen()">&#x2922;</span>
-  <img id="modal-img" class="modal-content" src="" alt="Imagem em tamanho completo">
-  <div id="caption"></div>
-</div>
-
-<div id="main-background"></div>
-
-<script src="gallery.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/node-vibrant@2.0.3/dist/vibrant.min.js"></script>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo" class="logo" id="logo">
+            <span class="site-name">PIXEL <br> MEMORIES</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="about.html">Sobre mim</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="intro">
+            <h1>O MUNDO ATRAVÉS DAS CAPTURAS</h1>
+            <p>Cada screenshot captura não apenas um momento do jogo, mas também uma parte da minha jornada, transformando pixels em memórias eternas. </p>
+            <img src="avatar.jpg" alt="Avatar" class="avatar">
+            <p>Eu tiro fotos em mundos virtuais e compartilho com o mundo real.</p>
+            <a href="gallery.html" class="btn">Confira a Galeria</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Pixel Memories. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>

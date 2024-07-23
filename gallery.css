@@ -172,6 +172,7 @@ body {
 .image-gallery.square-view li {
   height: 350px;
   flex: 0 0 auto;
+  flex-grow: 999;
 }
 
 .image-gallery.square-view li img {
