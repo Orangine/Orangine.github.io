@@ -15,17 +15,18 @@
         <img src="logo.png" alt="Logo" class="logo" id="logo"> <!-- Substitua "logo.png" pelo caminho da sua logo -->
         <span class="site-name">PIXEL <br> MEMORIES</span>
     </div>
-
+    <div class="buttons">
     <a class="active" onclick="showAll()" data-nav="all">Todas</a>
     <a onclick="showLandscape()" data-nav="landscape">Paisagem</a>
     <a onclick="showPortrait()" data-nav="portrait">Retrato</a>
+    </div>
 
     <!-- Ícones para alternar a visualização -->
     <div class="view-toggle-icons">
-      <i class="fas fa-list" onclick="setGridView('default')"></i>
-      <i class="fas fa-th" onclick="setGridView('square')"></i>
-  </div>
-
+      <i class="fas fa-th" data-view="default"></i> <!-- Ícone para visualização padrão -->
+      <i class="fas fa-th-large" data-view="square"></i> <!-- Ícone para visualização em quadrado -->
+    </div>
+    
     <div class="search-bar">
         <input type="text" id="searchInput" oninput="searchImages()" placeholder="Pesquisar por jogo...">
         <span id="clearSearch" class="clear-search">&#10006;</span>

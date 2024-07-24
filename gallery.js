@@ -136,8 +136,8 @@ function handleKeyboardNavigation(event) {
   // Atualiza o modal com a nova imagem e descrição
   const imgSrc = imageUrls[currentImageIndex];
   const imgAlt = document.getElementById("modal-img").alt;
-  const imgDescription = document.querySelectorAll('.image-gallery li img')[currentImageIndex].getAttribute("data-description");
-  
+  const imgDescription = document.querySelectorAll('.image-gallery li')[currentImageIndex].querySelector('.image-description').innerHTML;
+
   const modalImg = document.getElementById("modal-img");
   const captionText = document.getElementById("caption");
 
@@ -148,6 +148,7 @@ function handleKeyboardNavigation(event) {
   // Atualiza o fundo principal com o URL da imagem atual no modal
   document.getElementById("main-background").style.backgroundImage = `url('${imgSrc}')`;
 }
+
 
 // Função para mostrar todas as imagens
 function showAll() {
@@ -264,8 +265,10 @@ window.onload = showAll;
 loadImagesFromJson();
 
 // Função para alternar a visualização do grid
+// Função para alternar a visualização do grid
 function setGridView(view) {
   const gallery = document.querySelector('.image-gallery');
+  const toggleIcons = document.querySelectorAll('.view-toggle-icons i');
 
   if (view === 'square') {
     gallery.classList.remove('default-view');
@@ -274,12 +277,29 @@ function setGridView(view) {
     gallery.classList.remove('square-view');
     gallery.classList.add('default-view');
   }
+
+  // Atualiza o ícone ativo
+  toggleIcons.forEach(icon => {
+    icon.classList.remove('active');
+    if (icon.getAttribute('data-view') === view) {
+      icon.classList.add('active');
+    }
+  });
 }
 
 // Defina a visualização padrão ao carregar a página
 document.addEventListener("DOMContentLoaded", function() {
   setGridView('default');
 });
+
+// Adiciona eventos de clique para os ícones de alternância de visualização
+document.querySelectorAll('.view-toggle-icons i').forEach(icon => {
+  icon.addEventListener('click', function() {
+    const view = this.getAttribute('data-view');
+    setGridView(view);
+  });
+});
+
 
 document.getElementById('logo').addEventListener('click', function() {
   window.location.href = 'https://orangine.github.io'; // Substitua pelo URL desejado
