@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Wallpaper Gallery</title>
-    <link rel="stylesheet" href="wallpapers.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="wallpaper-container">
@@ -12,7 +12,14 @@
         <div id="info">
             <span id="game"></span> - <span id="author"></span>
         </div>
+        <div id="menu">
+            <button id="next-btn">&#x276F; Próxima</button>
+            <button id="view-btn">&#x1F50D; Ver no navegador</button>
+        </div>
+        <div id="menu-toggle" onclick="toggleMenu()">
+            &#x2630;
+        </div>
     </div>
-    <script src="wallpapers.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
