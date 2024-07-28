@@ -11,12 +11,6 @@ let currentImageIndex = 0;
 let imageUrls = [];
 
 document.addEventListener("DOMContentLoaded", function() {
-  const jsonUrl = 'gallery.json'; // Atualize para o caminho correto do seu arquivo JSON
-
-  let lastModalImageUrl = "";
-  let currentImageIndex = 0;
-  let imageUrls = [];
-
   async function loadImagesFromJson() {
     try {
       const response = await fetch(jsonUrl);
@@ -30,7 +24,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const image = images[index];
         const li = document.createElement("li");
         const img = document.createElement("img");
-        img.src = image.link;
+
+        // Cria a miniatura usando o Canvas
+        createThumbnail(image.link, img);
 
         // Cria o elemento de descrição e o adiciona à lista
         const description = document.createElement("div");
@@ -48,9 +44,6 @@ document.addEventListener("DOMContentLoaded", function() {
           currentImageIndex = index;
           openModal(image.link, image.game, image.author);
         });
-
-        // Cria a miniatura usando o Canvas
-        createThumbnail(image.link, img);
 
         // Extrai e aplica as cores vibrantes à imagem
         extractAndApplyColors(img.src, li);
@@ -108,7 +101,7 @@ function extractAndApplyColors(imageUrl, listItem) {
       return;
     }
 
-    // Extraia as cores DarkVibrant e DarkMuted
+    // Extraia as cores Vibrant e DarkMuted
     const vibrantColor = palette.Vibrant.getHex();
     const darkMutedColor = palette.DarkMuted.getHex();
 
@@ -188,7 +181,6 @@ function handleKeyboardNavigation(event) {
   // Atualiza o fundo principal com o URL da imagem atual no modal
   document.getElementById("main-background").style.backgroundImage = `url('${imgSrc}')`;
 }
-
 
 // Função para mostrar todas as imagens
 function showAll() {
@@ -280,31 +272,12 @@ function openFullscreen() {
   }
 }
 
-// Função para atualizar a exibição das imagens quando um filtro é aplicado
-function setActiveNavItem(navItem) {
-  const navItems = document.querySelectorAll('.navbar a');
-  navItems.forEach(item => {
-    item.classList.remove('active');
-    if (item.getAttribute('data-nav') === navItem) {
-      item.classList.add('active');
-    }
-  });
-  searchImages(); // Chama a função de pesquisa após definir o filtro ativo
-}
-
 // Função para limpar a barra de pesquisa
 document.getElementById("clearSearch").addEventListener("click", () => {
   document.getElementById("searchInput").value = "";
   searchImages();
 });
 
-// Função para exibir o conteúdo completo ao iniciar a página
-window.onload = showAll;
-
-// Chama a função para carregar as imagens do gallery.json
-loadImagesFromJson();
-
-// Função para alternar a visualização do grid
 // Função para alternar a visualização do grid
 function setGridView(view) {
   const gallery = document.querySelector('.image-gallery');
@@ -339,7 +312,6 @@ document.querySelectorAll('.view-toggle-icons i').forEach(icon => {
     setGridView(view);
   });
 });
-
 
 document.getElementById('logo').addEventListener('click', function() {
   window.location.href = 'https://orangine.github.io'; // Substitua pelo URL desejado
