@@ -13,23 +13,6 @@ background-color: #ddd;
 color: black;
 }
 
-/* Estilo do indicador de carregamento */
-.loading-indicator {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 24px;
-  color: var(--text-main);
-  display: none;
-}
-
-/* Oculta o indicador quando o carregamento estiver completo */
-.loaded .loading-indicator {
-  display: none;
-}
-
-
 /* Barra de Navegação */
 :root {
   --active-bg: #ccc;
