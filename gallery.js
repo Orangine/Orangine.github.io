@@ -10,55 +10,95 @@ let currentImageIndex = 0;
 // Lista de URLs das imagens
 let imageUrls = [];
 
-// Função para carregar as imagens do gallery.json
-async function loadImagesFromJson() {
-  try {
-    const response = await fetch(jsonUrl);
-    const data = await response.json();
-    const images = data.images;
-    const gallery = document.getElementById("imgur-album");
+document.addEventListener("DOMContentLoaded", function() {
+  const jsonUrl = 'gallery.json'; // Atualize para o caminho correto do seu arquivo JSON
 
-    // Inverte a ordem das imagens
-    images.reverse();
+  let lastModalImageUrl = "";
+  let currentImageIndex = 0;
+  let imageUrls = [];
 
-    images.forEach((image, index) => {
-      const li = document.createElement("li");
-      const img = document.createElement("img");
-      img.src = image.link;
-      li.appendChild(img);
+  async function loadImagesFromJson() {
+    try {
+      const response = await fetch(jsonUrl);
+      const data = await response.json();
+      const images = data.images;
+      const gallery = document.getElementById("imgur-album");
 
-      // Cria o elemento de descrição e o adiciona à lista
-      const description = document.createElement("div");
-      description.classList.add("image-description");
-      description.innerHTML = `<div>${image.game}</div><div>Por ${image.author}</div>`;
-      li.appendChild(description);
+      images.reverse();
 
-      if (index === 0 && isPortrait(image)) {
-        li.classList.add("last-image"); // Adiciona a classe à última imagem em retrato
+      for (let index = 0; index < images.length; index++) {
+        const image = images[index];
+        const li = document.createElement("li");
+        const img = document.createElement("img");
+        img.src = image.link;
+
+        // Cria o elemento de descrição e o adiciona à lista
+        const description = document.createElement("div");
+        description.classList.add("image-description");
+        description.innerHTML = `<div>${image.game}</div><div>Por ${image.author}</div>`;
+        li.appendChild(description);
+
+        gallery.appendChild(li);
+
+        // Adiciona o URL da imagem à lista
+        imageUrls.push(image.link);
+
+        // Adiciona um evento de clique para abrir o modal com a imagem clicada
+        img.addEventListener("click", function() {
+          currentImageIndex = index;
+          openModal(image.link, image.game, image.author);
+        });
+
+        // Cria a miniatura usando o Canvas
+        createThumbnail(image.link, img);
+
+        // Extrai e aplica as cores vibrantes à imagem
+        extractAndApplyColors(img.src, li);
       }
-      gallery.appendChild(li);
 
-      // Adiciona o URL da imagem à lista
-      imageUrls.push(image.link);
-
-      // Adiciona um evento de clique para abrir o modal com a imagem clicada
-      img.addEventListener("click", function() {
-        currentImageIndex = index;
-        openModal(image.link, image.game, image.author);
-      });
-
-      // Extrai e aplica as cores vibrantes à imagem
-      extractAndApplyColors(img.src, li);
-    });
-
-    // Define o fundo principal como a última imagem do grid após carregar as imagens
-    const lastImage = images[0];
-    document.getElementById("main-background").style.backgroundImage = `url('${lastImage.link}')`;
-  } catch (error) {
-    console.error("Erro ao carregar imagens do JSON:", error);
+      // Define o fundo principal como a última imagem do grid após carregar as imagens
+      const lastImage = images[0];
+      document.getElementById("main-background").style.backgroundImage = `url('${lastImage.link}')`;
+    } catch (error) {
+      console.error("Erro ao carregar imagens do JSON:", error);
+    }
   }
-}
 
+  // Função para criar uma miniatura usando o Canvas
+  function createThumbnail(src, imgElement) {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+
+    const image = new Image();
+    image.src = src;
+    image.onload = function() {
+      const maxDimension = 150; // Define o tamanho máximo da miniatura
+      let width = image.width;
+      let height = image.height;
+
+      if (width > height) {
+        if (width > maxDimension) {
+          height *= maxDimension / width;
+          width = maxDimension;
+        }
+      } else {
+        if (height > maxDimension) {
+          width *= maxDimension / height;
+          height = maxDimension;
+        }
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+      context.drawImage(image, 0, 0, width, height);
+
+      // Define o src da imagem do elemento img para a miniatura
+      imgElement.src = canvas.toDataURL();
+    };
+  }
+
+  loadImagesFromJson();
+});
 
 // Função para extrair e aplicar as cores vibrantes a uma imagem
 function extractAndApplyColors(imageUrl, listItem) {
