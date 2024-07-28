@@ -43,6 +43,7 @@ body, html {
     display: none;
     flex-direction: column;
     gap: 10px;
+    z-index: 1;
 }
 
 #menu button {
@@ -52,6 +53,7 @@ body, html {
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
+    z-index: 1;
 }
 
 #menu button:hover {
@@ -65,4 +67,5 @@ body, html {
     padding: 10px;
     border-radius: 50%;
     cursor: pointer;
+    z-index: 1;
 }
