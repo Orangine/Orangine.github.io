@@ -1,63 +1,99 @@
-// URL do arquivo JSON com as imagens
-const jsonUrl = 'gallery.json'; // Atualize para o caminho correto do seu arquivo JSON
+document.addEventListener("DOMContentLoaded", function() {
+  // URL do arquivo JSON com as imagens
+  const jsonUrl = 'gallery.json'; // Atualize para o caminho correto do seu arquivo JSON
 
-// Variável para armazenar o URL da última imagem vista no modal
-let lastModalImageUrl = "";
+  // Variável para armazenar o URL da última imagem vista no modal
+  let lastModalImageUrl = "";
 
-// Índice da imagem atual no modal
-let currentImageIndex = 0;
+  // Índice da imagem atual no modal
+  let currentImageIndex = 0;
 
-// Lista de URLs das imagens
-let imageUrls = [];
+  // Lista de URLs das imagens
+  let imageUrls = [];
 
-// Função para carregar as imagens do gallery.json
-async function loadImagesFromJson() {
-  try {
-    const response = await fetch(jsonUrl);
-    const data = await response.json();
-    const images = data.images;
-    const gallery = document.getElementById("imgur-album");
+  // Função para carregar as imagens do gallery.json
+  async function loadImagesFromJson() {
+    try {
+      const response = await fetch(jsonUrl);
+      const data = await response.json();
+      const images = data.images;
+      const gallery = document.getElementById("imgur-album");
 
-    // Inverte a ordem das imagens
-    images.reverse();
+      // Inverte a ordem das imagens
+      images.reverse();
 
-    images.forEach((image, index) => {
-      const li = document.createElement("li");
-      const img = document.createElement("img");
-      img.src = image.link;
-      li.appendChild(img);
+      images.forEach((image, index) => {
+        const li = document.createElement("li");
+        const img = document.createElement("img");
+        img.setAttribute('data-src', image.link); // Lazy loading
 
-      // Cria o elemento de descrição e o adiciona à lista
-      const description = document.createElement("div");
-      description.classList.add("image-description");
-      description.innerHTML = `<div>${image.game}</div><div>Por ${image.author}</div>`;
-      li.appendChild(description);
+        // Placeholder de carregamento
+        img.src = 'placeholder.jpg';
 
-      if (index === 0 && isPortrait(image)) {
-        li.classList.add("last-image"); // Adiciona a classe à última imagem em retrato
-      }
-      gallery.appendChild(li);
+        li.appendChild(img);
 
-      // Adiciona o URL da imagem à lista
-      imageUrls.push(image.link);
+        // Cria o elemento de descrição e o adiciona à lista
+        const description = document.createElement("div");
+        description.classList.add("image-description");
+        description.innerHTML = `<div>${image.game}</div><div>Por ${image.author}</div>`;
+        li.appendChild(description);
 
-      // Adiciona um evento de clique para abrir o modal com a imagem clicada
-      img.addEventListener("click", function() {
-        currentImageIndex = index;
-        openModal(image.link, image.game, image.author);
+        if (index === 0 && isPortrait(image)) {
+          li.classList.add("last-image"); // Adiciona a classe à última imagem em retrato
+        }
+        gallery.appendChild(li);
+
+        // Adiciona o URL da imagem à lista
+        imageUrls.push(image.link);
+
+        // Adiciona um evento de clique para abrir o modal com a imagem clicada
+        img.addEventListener("click", function() {
+          currentImageIndex = index;
+          openModal(image.link, image.game, image.author);
+        });
+
+        // Extrai e aplica as cores vibrantes à imagem
+        extractAndApplyColors(img.dataset.src, li);
       });
 
-      // Extrai e aplica as cores vibrantes à imagem
-      extractAndApplyColors(img.src, li);
+      // Lazy loading
+      lazyLoadImages();
+
+      // Define o fundo principal como a última imagem do grid após carregar as imagens
+      const lastImage = images[0];
+      document.getElementById("main-background").style.backgroundImage = `url('${lastImage.link}')`;
+
+      // Esconde o indicador de carregamento
+      document.getElementById('loading-indicator').style.display = 'none';
+    } catch (error) {
+      console.error("Erro ao carregar imagens do JSON:", error);
+    }
+  }
+
+  // Função para lazy loading de imagens
+  function lazyLoadImages() {
+    const images = document.querySelectorAll('img[data-src]');
+
+    const loadImage = (image) => {
+      image.src = image.dataset.src;
+      image.onload = () => {
+        image.removeAttribute('data-src');
+      };
+    };
+
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadImage(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
     });
 
-    // Define o fundo principal como a última imagem do grid após carregar as imagens
-    const lastImage = images[0];
-    document.getElementById("main-background").style.backgroundImage = `url('${lastImage.link}')`;
-  } catch (error) {
-    console.error("Erro ao carregar imagens do JSON:", error);
+    images.forEach(img => {
+      imageObserver.observe(img);
+    });
   }
-}
 
 
 // Função para extrair e aplicar as cores vibrantes a uma imagem
@@ -78,7 +114,6 @@ function extractAndApplyColors(imageUrl, listItem) {
   });
 }
 
-// Função para verificar se a imagem é em retrato
 function isPortrait(image) {
   return image.width < image.height;
 }
@@ -265,7 +300,6 @@ window.onload = showAll;
 loadImagesFromJson();
 
 // Função para alternar a visualização do grid
-// Função para alternar a visualização do grid
 function setGridView(view) {
   const gallery = document.querySelector('.image-gallery');
   const toggleIcons = document.querySelectorAll('.view-toggle-icons i');
@@ -300,7 +334,7 @@ document.querySelectorAll('.view-toggle-icons i').forEach(icon => {
   });
 });
 
-
 document.getElementById('logo').addEventListener('click', function() {
   window.location.href = 'https://orangine.github.io'; // Substitua pelo URL desejado
+});
 });
