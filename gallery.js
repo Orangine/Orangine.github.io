@@ -10,97 +10,55 @@ let currentImageIndex = 0;
 // Lista de URLs das imagens
 let imageUrls = [];
 
-document.addEventListener("DOMContentLoaded", function() {
-  async function loadImagesFromJson() {
-    try {
-      const response = await fetch(jsonUrl);
-      const data = await response.json();
-      const images = data.images;
-      const gallery = document.getElementById("imgur-album");
+// Função para carregar as imagens do gallery.json
+async function loadImagesFromJson() {
+  try {
+    const response = await fetch(jsonUrl);
+    const data = await response.json();
+    const images = data.images;
+    const gallery = document.getElementById("imgur-album");
 
-      images.reverse();
+    // Inverte a ordem das imagens
+    images.reverse();
 
-      for (let index = 0; index < images.length; index++) {
-        const image = images[index];
-        const li = document.createElement("li");
-        const img = document.createElement("img");
+    images.forEach((image, index) => {
+      const li = document.createElement("li");
+      const img = document.createElement("img");
+      img.src = image.link;
+      li.appendChild(img);
 
-        // Cria a miniatura usando o Canvas
-        createThumbnail(image.link, img);
+      // Cria o elemento de descrição e o adiciona à lista
+      const description = document.createElement("div");
+      description.classList.add("image-description");
+      description.innerHTML = `<div>${image.game}</div><div>Por ${image.author}</div>`;
+      li.appendChild(description);
 
-        // Cria o elemento de descrição e o adiciona à lista
-        const description = document.createElement("div");
-        description.classList.add("image-description");
-        description.innerHTML = `<div>${image.game}</div><div>Por ${image.author}</div>`;
-        li.appendChild(img);
-        li.appendChild(description);
-
-        gallery.appendChild(li);
-
-        // Adiciona o URL da imagem à lista
-        imageUrls.push(image.link);
-
-        // Adiciona um evento de clique para abrir o modal com a imagem clicada
-        img.addEventListener("click", function() {
-          currentImageIndex = index;
-          openModal(image.link, image.game, image.author);
-        });
-
-        // Extrai e aplica as cores vibrantes à imagem
-        extractAndApplyColors(image.link, li);
+      if (index === 0 && isPortrait(image)) {
+        li.classList.add("last-image"); // Adiciona a classe à última imagem em retrato
       }
+      gallery.appendChild(li);
 
-      // Define o fundo principal como a última imagem do grid após carregar as imagens
-      const lastImage = images[0];
-      document.getElementById("main-background").style.backgroundImage = `url('${lastImage.link}')`;
-    } catch (error) {
-      console.error("Erro ao carregar imagens do JSON:", error);
-    }
+      // Adiciona o URL da imagem à lista
+      imageUrls.push(image.link);
+
+      // Adiciona um evento de clique para abrir o modal com a imagem clicada
+      img.addEventListener("click", function() {
+        currentImageIndex = index;
+        openModal(image.link, image.game, image.author);
+      });
+
+      // Extrai e aplica as cores vibrantes à imagem
+      extractAndApplyColors(img.src, li);
+    });
+
+    // Define o fundo principal como a última imagem do grid após carregar as imagens
+    const lastImage = images[0];
+    document.getElementById("main-background").style.backgroundImage = `url('${lastImage.link}')`;
+  } catch (error) {
+    console.error("Erro ao carregar imagens do JSON:", error);
   }
+}
 
-  // Função para criar uma miniatura usando o Canvas
-  function createThumbnail(src, imgElement) {
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
-
-    const image = new Image();
-    image.crossOrigin = "Anonymous"; // Adiciona esta linha para evitar problemas de CORS
-    image.src = src;
-    
-    image.onload = function() {
-      console.log(`Image loaded: ${src}`);
-      const maxDimension = 150; // Define o tamanho máximo da miniatura
-      let width = image.width;
-      let height = image.height;
-
-      if (width > height) {
-        if (width > maxDimension) {
-          height *= maxDimension / width;
-          width = maxDimension;
-        }
-      } else {
-        if (height > maxDimension) {
-          width *= maxDimension / height;
-          height = maxDimension;
-        }
-      }
-
-      canvas.width = width;
-      canvas.height = height;
-      context.drawImage(image, 0, 0, width, height);
-
-      // Define o src da imagem do elemento img para a miniatura
-      imgElement.src = canvas.toDataURL();
-      console.log(`Thumbnail created for: ${src}`);
-    };
-
-    image.onerror = function() {
-      console.error(`Failed to load image: ${src}`);
-    };
-  }
-
-  loadImagesFromJson();
-});
 
 // Função para extrair e aplicar as cores vibrantes a uma imagem
 function extractAndApplyColors(imageUrl, listItem) {
@@ -110,7 +68,7 @@ function extractAndApplyColors(imageUrl, listItem) {
       return;
     }
 
-    // Extraia as cores Vibrant e DarkMuted
+    // Extraia as cores DarkVibrant e DarkMuted
     const vibrantColor = palette.Vibrant.getHex();
     const darkMutedColor = palette.DarkMuted.getHex();
 
@@ -191,6 +149,7 @@ function handleKeyboardNavigation(event) {
   document.getElementById("main-background").style.backgroundImage = `url('${imgSrc}')`;
 }
 
+
 // Função para mostrar todas as imagens
 function showAll() {
   const images = document.querySelectorAll('.image-gallery li');
@@ -246,15 +205,13 @@ function searchImages() {
   images.forEach(img => {
     const description = img.querySelector('.image-description').textContent.toUpperCase();
     let shouldBeDisplayed = true; // Assume que a imagem deve ser exibida por padrão
-
-    // Verifica se a descrição da imagem contém o filtro de pesquisa
+    const activeNavItem = document.querySelector('.navbar a.active').getAttribute('data-nav');
+    // Verifica se a imagem passa no filtro de pesquisa
     if (!description.includes(filter)) {
       shouldBeDisplayed = false;
     }
-
-    // Verifica se há um filtro ativo (paisagem ou retrato)
-    const activeNavItem = document.querySelector('.navbar a.active')?.getAttribute('data-nav');
-    if (activeNavItem) {
+    // Verifica se a imagem passa no filtro ativo (se houver)
+    if (activeNavItem !== 'all' && activeNavItem !== undefined) {
       const imgElement = img.querySelector('img');
       if (activeNavItem === 'landscape' && imgElement.naturalWidth < imgElement.naturalHeight) {
         shouldBeDisplayed = false;
@@ -262,7 +219,6 @@ function searchImages() {
         shouldBeDisplayed = false;
       }
     }
-
     // Define a exibição da imagem com base nos resultados dos filtros
     img.style.display = shouldBeDisplayed ? 'flex' : 'none';
   });
@@ -284,12 +240,31 @@ function openFullscreen() {
   }
 }
 
+// Função para atualizar a exibição das imagens quando um filtro é aplicado
+function setActiveNavItem(navItem) {
+  const navItems = document.querySelectorAll('.navbar a');
+  navItems.forEach(item => {
+    item.classList.remove('active');
+    if (item.getAttribute('data-nav') === navItem) {
+      item.classList.add('active');
+    }
+  });
+  searchImages(); // Chama a função de pesquisa após definir o filtro ativo
+}
+
 // Função para limpar a barra de pesquisa
 document.getElementById("clearSearch").addEventListener("click", () => {
   document.getElementById("searchInput").value = "";
   searchImages();
 });
 
+// Função para exibir o conteúdo completo ao iniciar a página
+window.onload = showAll;
+
+// Chama a função para carregar as imagens do gallery.json
+loadImagesFromJson();
+
+// Função para alternar a visualização do grid
 // Função para alternar a visualização do grid
 function setGridView(view) {
   const gallery = document.querySelector('.image-gallery');
@@ -324,6 +299,7 @@ document.querySelectorAll('.view-toggle-icons i').forEach(icon => {
     setGridView(view);
   });
 });
+
 
 document.getElementById('logo').addEventListener('click', function() {
   window.location.href = 'https://orangine.github.io'; // Substitua pelo URL desejado
