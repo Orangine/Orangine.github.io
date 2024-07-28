@@ -25,7 +25,7 @@ body, html {
 
 #info {
     position: absolute;
-    bottom: 50px;
+    bottom: 75px;
     right: 10px;
     background: rgba(0, 0, 0, 0.5);
     padding: 5px 10px;
@@ -35,9 +35,8 @@ body, html {
 
 #menu {
     position: absolute;
-    top: 60px;
+    top: 40px;
     right: 10px;
-    background: rgba(0, 0, 0, 0.8);
     padding: 10px;
     border-radius: 5px;
     display: none;
@@ -47,7 +46,7 @@ body, html {
 }
 
 #menu button {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(255, 255, 255, 0.05);
     border: none;
     color: white;
     padding: 10px;
