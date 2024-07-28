@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const description = document.createElement("div");
         description.classList.add("image-description");
         description.innerHTML = `<div>${image.game}</div><div>Por ${image.author}</div>`;
+        li.appendChild(img);
         li.appendChild(description);
 
         gallery.appendChild(li);
@@ -46,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         // Extrai e aplica as cores vibrantes à imagem
-        extractAndApplyColors(img.src, li);
+        extractAndApplyColors(image.link, li);
       }
 
       // Define o fundo principal como a última imagem do grid após carregar as imagens
@@ -63,8 +64,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const context = canvas.getContext("2d");
 
     const image = new Image();
+    image.crossOrigin = "Anonymous"; // Adiciona esta linha para evitar problemas de CORS
     image.src = src;
+    
     image.onload = function() {
+      console.log(`Image loaded: ${src}`);
       const maxDimension = 150; // Define o tamanho máximo da miniatura
       let width = image.width;
       let height = image.height;
@@ -87,6 +91,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Define o src da imagem do elemento img para a miniatura
       imgElement.src = canvas.toDataURL();
+      console.log(`Thumbnail created for: ${src}`);
+    };
+
+    image.onerror = function() {
+      console.error(`Failed to load image: ${src}`);
     };
   }
 
@@ -237,13 +246,15 @@ function searchImages() {
   images.forEach(img => {
     const description = img.querySelector('.image-description').textContent.toUpperCase();
     let shouldBeDisplayed = true; // Assume que a imagem deve ser exibida por padrão
-    const activeNavItem = document.querySelector('.navbar a.active').getAttribute('data-nav');
-    // Verifica se a imagem passa no filtro de pesquisa
+
+    // Verifica se a descrição da imagem contém o filtro de pesquisa
     if (!description.includes(filter)) {
       shouldBeDisplayed = false;
     }
-    // Verifica se a imagem passa no filtro ativo (se houver)
-    if (activeNavItem !== 'all' && activeNavItem !== undefined) {
+
+    // Verifica se há um filtro ativo (paisagem ou retrato)
+    const activeNavItem = document.querySelector('.navbar a.active')?.getAttribute('data-nav');
+    if (activeNavItem) {
       const imgElement = img.querySelector('img');
       if (activeNavItem === 'landscape' && imgElement.naturalWidth < imgElement.naturalHeight) {
         shouldBeDisplayed = false;
@@ -251,6 +262,7 @@ function searchImages() {
         shouldBeDisplayed = false;
       }
     }
+
     // Define a exibição da imagem com base nos resultados dos filtros
     img.style.display = shouldBeDisplayed ? 'flex' : 'none';
   });
