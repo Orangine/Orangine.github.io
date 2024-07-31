@@ -15,41 +15,13 @@ async function loadImagesFromJson() {
   try {
     const response = await fetch(jsonUrl);
     const data = await response.json();
-    const images = data.images;
+    const images = data.images.reverse(); // Inverte a ordem das imagens
+
     const gallery = document.getElementById("imgur-album");
 
-    // Inverte a ordem das imagens
-    images.reverse();
-
-    images.forEach((image, index) => {
-      const li = document.createElement("li");
-      const img = document.createElement("img");
-      img.src = image.link;
-      li.appendChild(img);
-
-      // Cria o elemento de descrição e o adiciona à lista
-      const description = document.createElement("div");
-      description.classList.add("image-description");
-      description.innerHTML = `<div>${image.game}</div><div>Por ${image.author}</div>`;
-      li.appendChild(description);
-
-      if (index === 0 && isPortrait(image)) {
-        li.classList.add("last-image"); // Adiciona a classe à última imagem em retrato
-      }
-      gallery.appendChild(li);
-
-      // Adiciona o URL da imagem à lista
-      imageUrls.push(image.link);
-
-      // Adiciona um evento de clique para abrir o modal com a imagem clicada
-      img.addEventListener("click", function() {
-        currentImageIndex = index;
-        openModal(image.link, image.game, image.author);
-      });
-
-      // Extrai e aplica as cores vibrantes à imagem
-      extractAndApplyColors(img.src, li);
-    });
+    for (let image of images) {
+      await addImageToGallery(image, gallery);
+    }
 
     // Define o fundo principal como a última imagem do grid após carregar as imagens
     const lastImage = images[0];
@@ -59,23 +31,67 @@ async function loadImagesFromJson() {
   }
 }
 
+async function addImageToGallery(image, gallery) {
+  const li = document.createElement("li");
+  const img = document.createElement("img");
+  img.src = image.link;
+  li.appendChild(img);
 
-// Função para extrair e aplicar as cores vibrantes a uma imagem
-function extractAndApplyColors(imageUrl, listItem) {
-  Vibrant.from(imageUrl).getPalette((err, palette) => {
-    if (err) {
-      console.error("Erro ao extrair cores vibrantes:", err);
-      return;
-    }
+  // Cria o elemento de descrição e o adiciona à lista
+  const description = document.createElement("div");
+  description.classList.add("image-description");
+  description.innerHTML = `<div>${image.game}</div><div>Por ${image.author}</div>`;
+  li.appendChild(description);
 
-    // Extraia as cores DarkVibrant e DarkMuted
+  if (isPortrait(image)) {
+    li.classList.add("last-image");
+  }
+  gallery.appendChild(li);
+
+  // Adiciona o URL da imagem à lista
+  imageUrls.push(image.link);
+
+  // Adiciona um evento de clique para abrir o modal com a imagem clicada
+  img.addEventListener("click", function() {
+    currentImageIndex = imageUrls.length - 1; // Atualiza o índice da imagem atual
+    openModal(image.link, image.game, image.author);
+  });
+
+  // Extrai e aplica as cores vibrantes à imagem
+  await extractAndApplyColors(img.src, li);
+}
+
+async function extractAndApplyColors(imageUrl, listItem) {
+  try {
+    const palette = await Vibrant.from(imageUrl).getPalette();
+
+    // Extraia as cores Vibrant e DarkMuted
     const vibrantColor = palette.Vibrant.getHex();
     const darkMutedColor = palette.DarkMuted.getHex();
 
     // Crie um gradiente linear diagonal para a borda
     listItem.style.borderImage = `linear-gradient(135deg, ${vibrantColor}, rgba(255, 255, 255, 0.1))`;
     listItem.style.borderImageSlice = 1;
-  });
+  } catch (err) {
+    console.error("Erro ao extrair cores vibrantes:", err);
+  }
+}
+
+// Função para extrair e aplicar as cores vibrantes a uma imagem
+async function extractAndApplyColors(imageUrl, listItem) {
+  try {
+    const palette = await Vibrant.from(imageUrl).getPalette();
+
+    // Extraia as cores Vibrant e DarkMuted
+    const vibrantColor = palette.Vibrant.getHex();
+    const darkMutedColor = palette.DarkMuted.getHex();
+
+    // Crie um gradiente linear diagonal para a borda
+    listItem.style.borderImage = `linear-gradient(135deg, ${vibrantColor}, rgba(255, 255, 255, 0.1))`;
+    listItem.style.borderImageSlice = 1;
+  } catch (err) {
+    console.error("Erro ao extrair cores vibrantes:", err);
+  }
 }
 
 // Função para verificar se a imagem é em retrato
@@ -101,16 +117,9 @@ function openModal(imgSrc, imgAlt, imgDescription) {
   lastModalImageUrl = imgSrc;
 
   // Adiciona eventos de teclado para navegar entre as imagens
+  document.removeEventListener("keydown", handleKeyboardNavigation); // Remove event listener anterior
   document.addEventListener("keydown", handleKeyboardNavigation);
 }
-
-// Função para fechar o modal quando se clica fora da imagem
-window.onclick = function(event) {
-  const modal = document.getElementById("modal");
-  if (event.target == modal) {
-    closeModal();
-  }
-};
 
 // Função para fechar o modal
 function closeModal() {

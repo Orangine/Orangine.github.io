@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pixel Memories</title>
-<link rel="icon" href="logo.png" type="image/x-icon">
-<link rel="stylesheet" href="gallery.css">
+<link rel="icon" href="Images/logo.png" type="image/x-icon">
+<link rel="stylesheet" href="styles/gallery.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
   <div class="navbar">
     <div class="logo-container">
-        <img src="logo.png" alt="Logo" class="logo" id="logo"> <!-- Substitua "logo.png" pelo caminho da sua logo -->
+        <img src="Images/logo.png" alt="Logo" class="logo" id="logo"> <!-- Substitua "logo.png" pelo caminho da sua logo -->
         <span class="site-name">PIXEL <br> MEMORIES</span>
     </div>
     <div class="buttons">
@@ -46,7 +46,7 @@
 
 <div id="main-background"></div>
 
-<script src="gallery.js"></script>
+<script src="script/gallery.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/node-vibrant@2.0.3/dist/vibrant.min.js"></script>
 </body>
 </html>
