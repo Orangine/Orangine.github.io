@@ -84,12 +84,6 @@ main {
     flex: 1;
 }
 
-.community {
-    position: relative;
-    text-align: center;
-    padding: 0 20px;
-}
-
 .avatar {
     position: relative;
     display: inline-block;
@@ -127,17 +121,16 @@ main {
   .avatar:hover::before,
   .avatar:hover::after {
     transform: scale(1); /* Mostra a borda completa ao passar o mouse */
-  }  
-  
-  
+  }
 
-.community h2 {
-    font-size: 2em;
-    margin-bottom: 10px;
+  .community {
+    position: relative;
+    text-align: center;
+    padding: 0 20px;
 }
 
-.community p {
-    margin-bottom: 0;
+.community h2 {
+  margin-bottom: 5px;
 }
 
 .community-links {
@@ -148,47 +141,64 @@ main {
 }
 
 .community-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-    width: 200px;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s, background 0.3s;
-    position: relative; /* Necessário para posicionar o feedback corretamente */
+  position: relative; /* Necessário para posicionar o overlay corretamente */
+  width: 250px;
+  height: 350px; /* Define a altura do card */
+  background-size: cover; /* Ajusta a imagem para cobrir todo o card */
+  background-position: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+  overflow: hidden; /* Garante que a imagem e o overlay não ultrapassem os limites do card */
+  transition: transform 0.3s, background 0.3s;
 }
 
-.copy-container {
-    display: flex;
-    align-items: center;
-    margin-top: 10px; /* Ajuste o espaçamento conforme necessário */
-    cursor: pointer; /* Muda o cursor para indicar que o texto pode ser clicado */
+.card-overlay {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.8); /* Fundo escuro para contraste */
+  color: white;
+  padding: 2px;
+  text-align: center;
+  transform: translateY(120%); /* Inicialmente fora da tela */
+  transition: transform 0.3s ease;
+  font-size: 12px;
+  font-weight: 500;
 }
 
-.copy-icon {
-    width: 20px; /* Ajuste o tamanho do ícone conforme necessário */
-    margin-right: 8px; /* Espaçamento entre o ícone e o texto */
+.community-card:hover .card-overlay {
+  transform: translateY(0); /* Move o overlay para dentro do card ao passar o mouse */
 }
 
-.copy-text {
-    font-size: 14px; /* Ajuste o tamanho do texto conforme necessário */
+.card-1:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #c16244; /* Cor da borda ao passar o mouse */
+  box-shadow: 0px 0px 10px 2px #c16244;
+  background-size: cover; /* Ajusta a imagem para cobrir todo o card */
+  background-position: center;
 }
 
-.community-card img {
-    height: 40px;
-    margin-bottom: 10px;
+.card-2:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #868686; /* Cor da borda ao passar o mouse */
+  box-shadow: 0px 0px 10px 2px #868686;
+  background-size: cover; /* Ajusta a imagem para cobrir todo o card */
+  background-position: center;
 }
 
-.community-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid teal; /* Cor da borda ao passar o mouse */
-    box-shadow: 0px 0px 10px 1px teal;
+.card-3:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #00a7e1; /* Cor da borda ao passar o mouse */
+  box-shadow: 0px 0px 10px 2px #00a7e1;
+  background-size: cover; /* Ajusta a imagem para cobrir todo o card */
+  background-position: center;
 }
 
 footer {
@@ -241,7 +251,6 @@ footer {
     margin-top: 20px; /* Espaçamento acima do botão, ajuste conforme necessário */
 }
 
-/* CSS */
 .gallery-button {
   margin: 10px;
   padding: 15px 30px;
@@ -262,13 +271,18 @@ footer {
   touch-action: manipulation;
 }
 
-.gallery-button:hover {
-  background-position: right center;
-  /* change the direction of the change here */
-  color: #fff;
+.gallery-button-link {
   text-decoration: none;
 }
 
+.gallery-button:hover {
+  background-position: right center;
+  color: #fff;
+  background-color: #ea670f;
+  text-decoration: none;
+  box-shadow: 0px 0px 10px rgba(184, 43, 6, 0.7);
+}
+
 .gallery-button:active {
-  transform: scale(0.95);
+  transform: scale(1.1);
 }
