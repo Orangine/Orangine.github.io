@@ -42,30 +42,30 @@
         images.reverse();
 
         function displayImages(filter) {
-            let galleryHtml = '';
-            const filteredImages = filter === 'all' ? images : images.filter(image => image.category === filter);
-            filteredImages.forEach(image => {
-                galleryHtml += `
-                    <a class="swipeboxExampleImg swipebox" href="${image.src}" title="${image.author}">
-                        <img alt="${image.game} <br> ${image.author}" src="${image.src}"/>
-                    </a>
-                `;
-            });
+    let galleryHtml = '';
+    const filteredImages = filter === 'all' ? images : images.filter(image => image.category === filter);
+    filteredImages.forEach(image => {
+        galleryHtml += `
+            <a class="swipeboxExampleImg swipebox" href="${image.src}" title="${image.author}">
+                <img alt="${image.game} <br> ${image.author}" src="${image.thumb}"/>
+            </a>
+        `;
+    });
 
-            $('#swipeboxExample').fadeOut(300, function() {
-                $(this).html(galleryHtml).fadeIn(300);
+    $('#swipeboxExample').fadeOut(300, function() {
+        $(this).html(galleryHtml).fadeIn(300);
 
-                // Inicializar Justified Gallery
-                $('#swipeboxExample').justifiedGallery({
-                    rowHeight: 300, // Ajuste este valor conforme necessário
-                    lastRow: 'nojustify', // Ajuste como preferir
-                    margins: 10 // Ajuste conforme necessário
-                }).on('jg.complete', function () {
-                    // Inicializar Swipebox após Justified Gallery completar
-                    $('.swipeboxExampleImg').swipebox();
-                });
-            });
-        }
+        // Inicializar Justified Gallery
+        $('#swipeboxExample').justifiedGallery({
+            rowHeight: 300, // Ajuste este valor conforme necessário
+            lastRow: 'nojustify', // Ajuste como preferir
+            margins: 10 // Ajuste conforme necessário
+        }).on('jg.complete', function () {
+            // Inicializar Swipebox após Justified Gallery completar
+            $('.swipeboxExampleImg').swipebox();
+        });
+    });
+}
 
         // Inicializar com todas as imagens
         displayImages('all');
