@@ -86,7 +86,7 @@
   font-weight: 400;
   border-radius: 5px;
   border: 2px solid rgba(255, 255, 255, 0.05); /* Borda suave para imitar vidro */
-  font-family: sans-serif;
+  font-family: 'Lexend', sans-serif;
   transform: translateY(120%); /* Inicia fora da tela */
   transition: transform 0.2s ease-in; /* Transição suave */
 }
