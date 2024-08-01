@@ -320,3 +320,12 @@ header {
 ::-webkit-scrollbar-corner {
   background-color: transparent; /* Fundo transparente */
 }
+
+img {
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+img.loaded {
+  opacity: 1;
+}
