@@ -47,7 +47,7 @@
     filteredImages.forEach(image => {
         galleryHtml += `
             <a class="swipeboxExampleImg swipebox" href="${image.src}" title="${image.author}">
-                <img alt="${image.game} <br> Por ${image.author}" src="${image.thumb}"/>
+                <img alt="${image.game} <br> Por <span style="color:white">${image.author}</span>" src="${image.thumb}"/>
             </a>
         `;
     });
