@@ -1,52 +1,138 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pixel Memories</title>
-<link rel="icon" href="Images/logo.png" type="image/x-icon">
-<link rel="stylesheet" href="styles/gallery.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Memories</title>
+    <link rel="icon" href="Images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="./Styles/gallery.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swipebox@1.4.6/src/css/swipebox.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="navbar">
-    <div class="logo-container">
-        <img src="Images/logo.png" alt="Logo" class="logo" id="logo"> <!-- Substitua "logo.png" pelo caminho da sua logo -->
-        <span class="site-name">PIXEL <br> MEMORIES</span>
-    </div>
-    <div class="buttons">
-    <a class="active" onclick="showAll()" data-nav="all">Todas</a>
-    <a onclick="showLandscape()" data-nav="landscape">Paisagem</a>
-    <a onclick="showPortrait()" data-nav="portrait">Retrato</a>
-    </div>
+    <header>
+        <div class="logo-filters">
+            <div class="logo">
+                <img src="Images/logo.png" alt="Pixel Memories Logo">
+            </div>
+            <ul class="nav-filters">
+                <li><a href="#" class="filter active" data-filter="all"><i class="fas fa-home"></i><span>Todos</span></a></li>
+                <li><a href="#" class="filter" data-filter="landscape"><i class="fas fa-tree"></i><span>Paisagem</span></a></li>
+                <li><a href="#" class="filter" data-filter="portrait"><i class="fas fa-portrait"></i><span>Retrato</span></a></li>
+            </ul>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="https://orangine.github.io">Início</a></li>
+                <li class="active"><a href="#">Galeria</a></li>
+            </ul>
+        </nav>
+    </header>       
+    <div id="background"></div>
+    <div id="swipeboxExample"></div>
 
-    <!-- Ícones para alternar a visualização -->
-    <div class="view-toggle-icons">
-      <i class="fas fa-th" data-view="default"></i> <!-- Ícone para visualização padrão -->
-      <i class="fas fa-th-large" data-view="square"></i> <!-- Ícone para visualização em quadrado -->
-    </div>
-    
-    <div class="search-bar">
-        <input type="text" id="searchInput" oninput="searchImages()" placeholder="Pesquisar por jogo...">
-        <span id="clearSearch" class="clear-search">&#10006;</span>
-    </div>
-</div>
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="./Scripts/gallery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swipebox@1.4.6/src/js/jquery.swipebox.min.js"></script>
+    <script>
+        $(document).ready(function() {
+    const images = [
+        { src: "https://i.imgur.com/icYM0WI.jpg", game: "Game 1", author: "Author 1", category: "landscape" },
+        { src: "https://i.imgur.com/2uWqvkr.jpg", game: "Game 2", author: "Author 2", category: "portrait" },
+        { src: "https://i.imgur.com/AMJVvla.jpg", game: "Game 3", author: "Author 3", category: "landscape" },
+        { src: "https://i.imgur.com/HASvvBC.jpg", game: "Game 4", author: "Author 4", category: "portrait" },
+        { src: "https://i.imgur.com/6feIXZr.jpg", game: "Game 5", author: "Just in a dream Place", category: "landscape" },
+        { src: "https://i.imgur.com/8OCHaKt.jpg", game: "Game 6", author: "Another beautiful place", category: "portrait" },
+        { src: "https://i.imgur.com/na6VNL5.jpg", game: "Game 7", author: "Author 7", category: "landscape" },
+        { src: "https://i.imgur.com/yfx2SCE.jpg", game: "Game 8", author: "Author 8", category: "portrait" },
+        { src: "https://i.imgur.com/BPFw5PB.jpg", game: "Game 9", author: "Author 9", category: "landscape" },
+        { src: "https://i.imgur.com/cWJELku.jpg", game: "Game 10", author: "Author 10", category: "portrait" },
+        { src: "https://i.imgur.com/yv6ihJR.jpg", game: "Game 11", author: "Author 11", category: "landscape" },
+        { src: "https://i.imgur.com/HJo0DoG.jpg", game: "Game 12", author: "Author 12", category: "portrait" },
+        { src: "https://i.imgur.com/ZCRbbK3.jpg", game: "Game 13", author: "Author 13", category: "landscape" }
+    ];
 
-<div id="suggestions" class="suggestions"></div>
+    images.reverse();
 
-<ul class="image-gallery" id="imgur-album"></ul>
+    function displayImages(filter) {
+        let galleryHtml = '';
+        const filteredImages = filter === 'all' ? images : images.filter(image => image.category === filter);
+        filteredImages.forEach(image => {
+            galleryHtml += `
+                <a class="swipeboxExampleImg swipebox" href="${image.src}" title="${image.author}">
+                    <img alt="${image.game} <br> ${image.author}" src="${image.src}"/>
+                </a>
+            `;
+        });
 
-<div id="modal" class="modal">
-  <span class="close" onclick="closeModal()">&times;</span>
-  <span class="fullscreen" onclick="openFullscreen()">&#x2922;</span>
-  <img id="modal-img" class="modal-content" src="" alt="Imagem em tamanho completo">
-  <div id="caption"></div>
-</div>
+        $('#swipeboxExample').fadeOut(300, function() {
+            $(this).html(galleryHtml).fadeIn(300);
 
-<div id="main-background"></div>
+            // Inicializar Justified Gallery
+            $('#swipeboxExample').justifiedGallery({
+                rowHeight: 300, // Ajuste este valor conforme necessário
+                lastRow: 'nojustify', // Ajuste como preferir
+                margins: 10 // Ajuste conforme necessário
+            }).on('jg.complete', function () {
+                // Inicializar Swipebox após Justified Gallery completar
+                $('.swipeboxExampleImg').swipebox();
+            });
+        });
+    }
 
-<script src="script/gallery.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/node-vibrant@2.0.3/dist/vibrant.min.js"></script>
+    // Inicializar com todas as imagens
+    displayImages('all');
+
+    // Evento de clique nos botões de filtro
+    $(document).on('click', '.nav-filters a', function(event) {
+        event.preventDefault();
+        $('.nav-filters a').removeClass('active');
+        $(this).addClass('active');
+        const filter = $(this).data('filter');
+        displayImages(filter);
+    });
+
+    // Definir a primeira imagem como fundo
+    $('#background').css('background-image', `url(${images[0].src})`);
+
+    // Função para atualizar o fundo
+    function updateBackground(imageSrc) {
+        $('#background').css('background-image', `url(${imageSrc})`);
+    }
+
+    // Atualizar o fundo quando uma imagem for visualizada no Swipebox
+    $(document).on('click', '.swipeboxExampleImg', function(event) {
+        event.preventDefault();
+        const currentImage = $(this).attr('href');
+        updateBackground(currentImage);
+        $.swipebox([
+            { href: currentImage, title: $(this).attr('title') }
+        ], {
+            afterOpen: function() {
+                // Atualizar o fundo quando a Swipebox é aberta
+                updateBackground(currentImage);
+            }
+        });
+    });
+
+    // Monitorar alterações no DOM da Swipebox para atualizar o fundo
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                const currentImage = $('#swipebox-slider .swipebox-current img').attr('src');
+                updateBackground(currentImage);
+            }
+        });
+    });
+
+    // Observar o elemento do slider da Swipebox
+    const swipeboxSlider = document.querySelector('#swipebox-slider');
+    if (swipeboxSlider) {
+        observer.observe(swipeboxSlider, { attributes: true });
+    }
+});
+
+    </script>    
 </body>
 </html>

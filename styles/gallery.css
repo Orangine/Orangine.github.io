@@ -1,405 +1,322 @@
-* {
+/*!
+ * justifiedGallery - v3.8.0
+ * http://miromannino.github.io/Justified-Gallery/
+ * Copyright (c) 2020 Miro Mannino
+ * Licensed under the MIT license.
+ */
+
+ body {
+  background-color: black;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-body {
-background-color: #151515;
-font-family: 'Lexend', sans-serif;
+  font-family: 'Lexend', sans-serif;
+  font-weight: 300;
 }
 
-.active {
-background-color: #ddd;
-color: black;
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  filter: blur(40px) brightness(0.5); /* Ajuste o valor do desfoque conforme necessário */
 }
 
-/* Barra de Navegação */
-:root {
-  --active-bg: #ccc;
-  --active-fg: #1a1a1a;
-  --active-hover-bg: #e6e6e6;
-  --blur-bg: blur(19px);
-  --blur-viewer-bg: blur(10px);
-  --border-radius: 30px;
-  --box-shadow-subtle: 0 5px 10px rgba(0,0,0,0.2);
-  --header-height: 50px;
-  --header-transition: background-color 100ms linear;
-  --inactive-hover-bg: hsla(0,0%,100%,0.1);
-  --mobile-header-margin-sides: 15px;
-  --search-bg: hsla(0,0%,100%,0.1);
-  --text-main: #efefef;
-  --text-shadow-1: 0 1px 8px rgba(0,0,0,0.5);
-  --text-shadow-2: 0 1px 0px rgba(0,0,0,0.6);
-  --text-shadow-3: 0 1px 8px rgba(255,255,255,0.76);
-  --text-shadow-4: 0 1px 0px rgba(255,255,255,0.76);
-  --translucent-bg: rgba(46,46,46,0.3);
-  --translucent-bg-fallback: rgba(71,71,71,0.95);
-  --mobile-breakpoint-large: 860px;
+.justified-gallery {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.justified-gallery > a,
+.justified-gallery > div,
+.justified-gallery > figure {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  background: #888888;
+  filter: "alpha(opacity=10)";
+  opacity: 0.1;
+  margin: 0;
+  padding: 0;
+}
+.justified-gallery > a {
+  border: 2px solid rgba(255, 255, 255, 0.05); /* Ajuste a largura conforme necessário */
 }
 
-/* Estilos para a navbar */
-.navbar {
+.justified-gallery > a > img,
+.justified-gallery > div > img,
+.justified-gallery > figure > img,
+.justified-gallery > a > a > img,
+.justified-gallery > div > a > img,
+.justified-gallery > figure > a > img,
+.justified-gallery > a > svg,
+.justified-gallery > div > svg,
+.justified-gallery > figure > svg,
+.justified-gallery > a > a > svg,
+.justified-gallery > div > a > svg,
+.justified-gallery > figure > a > svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  padding: 0;
+  filter: "alpha(opacity=0)";
+  opacity: 0;
+}
+/* Estilo inicial do caption com efeito de vidro */
+.justified-gallery > a > .jg-caption,
+.justified-gallery > div > .jg-caption,
+.justified-gallery > figure > .jg-caption {
+  display: flex; /* Usar flexbox para centralizar o texto */
+  align-items: flex-end; /* Alinha o texto ao fundo */
+  position: absolute;
+  bottom: 5px;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.5); /* Fundo quase transparente */
+  backdrop-filter: blur(10px); /* Efeito de desfoque de fundo */
+  -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
+  left: 5px;
+  right: 5px;
+  margin: 0;
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.05); /* Borda suave para imitar vidro */
+  font-family: sans-serif;
+  transform: translateY(120%); /* Inicia fora da tela */
+  transition: transform 0.2s ease-in; /* Transição suave */
+}
+
+/* Estilo do caption quando visível */
+.justified-gallery > a > .jg-caption.jg-caption-visible,
+.justified-gallery > div > .jg-caption.jg-caption-visible,
+.justified-gallery > figure > .jg-caption.jg-caption-visible {
+  transform: translateY(0); /* Move o caption para dentro da tela */
+}
+
+
+.justified-gallery > .jg-entry-visible {
+  filter: "alpha(opacity=100)";
+  opacity: 1;
+  background: none;
+}
+.justified-gallery > .jg-entry-visible > img,
+.justified-gallery > .jg-entry-visible > a > img,
+.justified-gallery > .jg-entry-visible > svg,
+.justified-gallery > .jg-entry-visible > a > svg {
+  filter: "alpha(opacity=100)";
+  opacity: 1;
+  -webkit-transition: opacity 500ms ease-in;
+  -moz-transition: opacity 500ms ease-in;
+  -o-transition: opacity 500ms ease-in;
+  transition: opacity 500ms ease-in;
+}
+.justified-gallery > .jg-filtered {
+  display: none;
+}
+.justified-gallery > .jg-spinner {
+  position: absolute;
+  bottom: 0;
+  margin-left: -24px;
+  padding: 10px 0 10px 0;
+  left: 50%;
+  filter: "alpha(opacity=100)";
+  opacity: 1;
+  overflow: initial;
+}
+.justified-gallery > .jg-spinner > span {
+  display: inline-block;
+  filter: "alpha(opacity=0)";
+  opacity: 0;
+  width: 8px;
+  height: 8px;
+  margin: 0 4px 0 4px;
+  background-color: #000;
+  border-radius: 6px;
+}
+
+/* Nav bar */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, rgba(46, 46, 46, 0.5), rgba(46, 46, 46, 0.7));
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  height: 50px;
+  backdrop-filter: blur(19px); /* Efeito de desfoque e brilho */
+  -webkit-backdrop-filter: blur(19px); /* Suporte para Safari */
+  padding: 0 20px; /* Espaçamento interno: apenas lateral */
+  margin: 0; /* Remove o margin da navbar */
+}
+
+.logo-filters {
   display: flex;
   align-items: center;
-  padding: 0.1rem 0.7rem;
-  background-color: var(--translucent-bg);
-  margin-bottom: 10px;
-}
-
-/* Logo e Nome do Site */
-.logo-container {
-display: flex;
-align-items: center; /* Alinha verticalmente a logo e o nome */
-margin-right: auto; /* Empurra o contêiner da logo para a esquerda */
-
 }
 
 .logo {
-height: 40px; /* Ajuste a altura conforme necessário */
-margin-right: 5px; /* Espaço entre a logo e o nome */
-cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 16px; /* Ajuste o tamanho da fonte conforme necessário */
 }
 
-.logo-container:hover .logo {
-animation: pulse 1s infinite;
+.logo img {
+  height: 40px;
+  margin-right: 10px;
 }
 
-@keyframes pulse {
-0% {
-    transform: scale(1);
-}
-50% {
-    transform: scale(1.1);
-}
-100% {
-    transform: scale(1);
-}
+.logo h1 {
+  margin: 0; /* Remove o margin padrão do h1 */
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+  color: #1f1f1f; /* Cor do texto da logo */
+  font-size: 20px; /* Ajuste o tamanho da fonte conforme necessário */
 }
 
-.site-name {
-font-size: 16px; /* Ajuste o tamanho da fonte conforme necessário */
-font-family: 'Lexend', sans-serif;
-font-weight: bold;
-color: #d0d0d0;
-pointer-events: none;
+/* Estilo para os filtros como botões */
+.nav-filters {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 0 10px; /* Espaçamento à esquerda da logo */
 }
 
-/* Estilos existentes para os links da navbar */
-.navbar a {
-  display: block;
-  color: var(--text-main);
-  text-align: center;
-  padding: 2px 15px;
+.nav-filters li {
+  position: relative; /* Necessário para o pseudo-elemento */
+}
+
+.nav-filters a {
   text-decoration: none;
-  transition: all 0.3s ease;
-  border-radius: 20px;
-  margin: 0 5px;
-  font-size: 13px;
-  font-weight: 600;
-  border: 2px solid transparent;
-  cursor: pointer;
+  color: #fff; /* Cor do texto dos botões */
+  padding: 15px; /* Espaço ao redor do texto dos botões */
+  background-color: rgba(46, 46, 46, 0.2); /* Cor de fundo dos botões */
+  transition: background-color 0.3s, transform 0.3s; /* Transições suaves */
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden; /* Para esconder o pseudo-elemento */
 }
 
-.navbar a.active {
-  background-color: var(--active-bg);
-  border: 2px solid rgba(0, 0, 0, 0.5);
-  color: var(--active-fg);
+.nav-filters a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5); /* Cor de fundo ao passar o mouse */
+  transition: left 0.3s;
+  z-index: -1; /* Colocar o pseudo-elemento atrás do texto */
 }
 
-.navbar a:hover {
-  background-color: var(--inactive-hover-bg);
-  color: #f9f9f9;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+.nav-filters a.active::before {
+  left: 0;
 }
 
-/* Barra de Pesquisa */
-.search-bar {
-margin-top: 10px;
-margin-bottom: 10px;
-display: flex;
-align-items: center;
-position: relative;
+.nav-filters a span {
+  display: none;
+  margin-left: 5px;
 }
 
-.search-bar input[type="text"] {
-padding: 5px 15px;
-border: 2px solid rgba(255, 255, 255, 0.1);
-border-radius: var(--border-radius);
-background-color: var(--translucent-bg);
-font-family: 'Lexend', sans-serif;
-color: var(--text-main);
-width: 200px;
-transition: background-color 0.3s ease, box-shadow 0.3s ease;
+.nav-filters a.active span {
+  display: inline-block;
 }
 
-.search-bar input[type="text"]:focus {
-outline: none;
-background-color: rgba(255, 255, 255, 0.1);
-color: white;
-border: 2px solid rgba(0, 128, 128, 0.5);
+.nav-filters a:hover {
+  text-decoration: none; /* Remove o sublinhado ao passar o mouse */
 }
 
-.clear-search {
-position: absolute;
-top: 49%;
-right: 15px;
-transform: translateY(-50%);
-cursor: pointer;
-color: rgba(255, 255, 255, 0.4);
-transition: color 0.3s ease;
+.nav-filters a:active {
+  background-color: rgba(100, 100, 100, 0.5); /* Cor de fundo ao clicar */
+  transform: translateY(0); /* Remove o movimento ao clicar */
 }
 
-.clear-search:hover {
-color: crimson;
+/* Estilo básico para o menu de navegação */
+.nav-menu {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-
-.buttons {
-display: flex;
-margin-right: 50px;
+.nav-menu li {
+  position: relative;
+  margin: 0 15px;
 }
 
-/* Galeria de Imagens */
-.image-gallery {
-display: flex;
-flex-wrap: wrap;
-gap: 8px;
-padding: 0;
-list-style-type: none;
-cursor: pointer;
-align-items: center;
-margin-left: 10px;
-margin-right: 10px;
+.nav-menu li a {
+  text-decoration: none;
+  color: #ccc; /* Cor do texto padrão */
+  padding: 5px 0;
+  display: block;
+  font-weight: bold; /* Destaque o texto do menu */
 }
 
-.image-gallery li {
-position: relative;
-height: 300px;
-cursor: pointer;
-flex-grow: 1;
-border: 2px solid rgba(255, 255, 255, 0.05);
-overflow: hidden; /* Garante que o conteúdo não ultrapasse os limites do contêiner */
-}
-
-.image-gallery li img {
-object-fit: cover;
-width: 100%;
-height: 100%;
-vertical-align: middle;
-transition: transform 0.5s ease;
-}
-
-.image-gallery li .image-description {
-position: absolute;
-bottom: -100%; /* Começa fora da vista, mas dentro do contêiner */
-left: 0;
-width: 100%;
-color: #edede9;
-padding: 10px;
-box-sizing: border-box;
-opacity: 0;
-transition: opacity 0.5s ease, transform 0.5s ease, bottom 0.5s ease;
-font-family: 'Lexend', sans-serif;
-white-space: pre-wrap;
-text-align: center;
-background-size: cover;
-background-position: center;
-background-color: rgba(0, 0, 0, 0.7);
-}
-
-.image-gallery li:hover .image-description {
-opacity: 1;
-bottom: 0; /* Move para a posição original dentro do contêiner */
-}
-
-.image-gallery::after {
-content: "";
-flex-grow: 999;
-}
-
-/* Visualizações de Grid */
-.image-gallery.default-view li {
-height: 300px;
-}
-
-.image-gallery.square-view {
-display: flex;
-flex-wrap: wrap;
-margin-left: 10px;
-margin-right: 10px;
-}
-
-.image-gallery.square-view li {
-height: 300px;
-flex-grow: 1;
-aspect-ratio: 1/1;
-position: relative;
-}
-
-.image-gallery.square-view li img {
-position: absolute;
-width: 100%;
-height: 100%;
-object-fit: cover;
-}
-
-/* Modal */
-.modal {
-display: none;
-position: fixed;
-z-index: 9999;
-padding-top: 50px;
-left: 0;
-top: 0;
-width: 100%;
-height: 100%;
-overflow: auto;
-background-color: rgba(0, 0, 0, 0.9);
-}
-
-.modal-content {
-margin: auto;
-display: block;
-max-width: 90%;
-max-height: 90%;
-transition: transform 0.3s ease;
-}
-
-.close {
-position: absolute;
-top: 15px;
-right: 35px;
-color: #f1f1f1;
-font-size: 40px;
-font-weight: bold;
-transition: 0.3s;
-}
-
-.close:hover,
-.close:focus {
-color: #bbb;
-text-decoration: none;
-cursor: pointer;
-}
-
-#caption {
-margin: auto;
-display: block;
-text-align: center;
-color: #ccc;
-font-family: 'Lexend', sans-serif;
-padding: 10px;
-font-size: 20px;
-white-space: pre-wrap;
-}
-
-/* Fundo Principal */
-#main-background {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: -1;
-filter: blur(25px) brightness(0.5);
-transition: background-image 0.5s ease-in-out;
-background-size: cover; /* Faz a imagem cobrir toda a área */
-background-position: center; /* Centraliza a imagem */
-}
-
-/* Ícones de Alternância de Visualização */
-.view-toggle-icons {
-  float: right;
-  margin-top: 13px;
-  margin-bottom: 10px;
-  margin-right: 20px;
-}
-
-.view-toggle-icons i {
-  color: var(--text-main);
-  font-size: 14px;
-  cursor: pointer;
-  margin-left: 10px;
-  transition: all 0.3s ease-in-out;
-  padding: 5px;
-  border-radius: 50%;
-  background-color: var(--translucent-bg);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.view-toggle-icons i:hover {
+/* Estilo para o item ativo */
+.nav-menu li.active a {
   color: #fff;
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
 }
 
-.view-toggle-icons i.active {
-  background-color: rgba(255, 255, 255, 0.8);
-  color: #000000;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transform: scale(1.2);
+/* Estilo para o item ativo com sublinhado */
+.nav-menu li.active::after {
+  width: 100%; /* Linha sempre visível no item ativo */
+  box-shadow: 0 0 5px teal;
 }
 
-/* Barra de Rolagem */
+/* Efeito quando o mouse passa sobre o item */
+.nav-menu li:hover::after {
+  width: 100%; /* Expande a linha para a largura total do item */
+  background: teal; /* Cor do sublinhado ao passar o mouse */
+}
+
+/* Pseudo-elemento para o sublinhado */
+.nav-menu li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px; /* Altura da linha de sublinhado */
+  background: teal; /* Cor do sublinhado */
+  transition: width 0.5s ease; /* Transição suave */
+}
+
+.nav-filters a.active {
+  background-color: rgba(100, 100, 100, 0.5); /* Cor de fundo do botão ativo */
+  color: #1a1a1a;
+}
+
+.nav-filters a.active span {
+  display: inline-block;
+}
+
+/* Estilos para a barra de rolagem */
 ::-webkit-scrollbar {
-width: 7px;
+  width: 7px; /* Largura da barra de rolagem */
 }
 
+/* Estilos para a alça da barra de rolagem */
 ::-webkit-scrollbar-thumb {
-background: rgba(55, 55, 55, 0.5);
-border-radius: 10px;
+  background: rgba(55, 55, 55, 0.5); /* Cor da alça da barra de rolagem */
+  border-radius: 10px; /* Borda arredondada */
 }
 
-::-webkit-scrollbar-track,
-::-webkit-scrollbar-track-piece,
+/* Estilos para o fundo da barra de rolagem */
+::-webkit-scrollbar-track {
+  background-color: transparent; /* Fundo transparente */
+}
+
+/* Estilos para a área de visualização da barra de rolagem */
+::-webkit-scrollbar-track-piece {
+  background-color: transparent; /* Fundo transparente */
+}
+
+/* Estilos para o canto inferior direito da barra de rolagem */
 ::-webkit-scrollbar-corner {
-background-color: transparent;
-}
-
-/* Contêiner de Sugestões */
-.suggestions {
-display: none;
-position: absolute;
-font-family: 'Lexend', sans-serif;
-text-shadow: 0 0 5px rgba(0,0,0,0.9);
-background-color: rgba(0, 0, 0, 0.8);
-color: #ffffff;
-border: 2px solid rgba(255, 255, 255, 0.05);
-border-radius: 5px;
-width: 210px;
-max-height: 200px;
-overflow-y: auto;
-z-index: 1000;
-margin-top: 8px;
-right: 25px;
-top: 35px;
-}
-
-.suggestion-item {
-padding: 5px 10px;
-cursor: pointer;
-}
-
-.suggestion-item:hover {
-background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Botão de Tela Cheia */
-.fullscreen {
-position: absolute;
-top: 25px;
-right: 70px;
-color: #f1f1f1;
-font-size: 25px;
-font-weight: bold;
-transition: 0.3s;
-}
-
-.fullscreen:hover,
-.fullscreen:focus {
-color: #bbb;
-text-decoration: none;
-cursor: pointer;
+  background-color: transparent; /* Fundo transparente */
 }
