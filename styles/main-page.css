@@ -5,7 +5,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     background-color: #1a1a1a;
-    background: url('../images/bg.jpg') no-repeat center center fixed; 
+    background: url('images/bg.jpg') no-repeat center center fixed; 
     backdrop-filter: blur(50px) brightness(0.3);
     background-size: cover;
     color: #ccc;
