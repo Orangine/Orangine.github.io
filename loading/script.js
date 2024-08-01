@@ -16,10 +16,14 @@ function fadeOut() {
     const loadingScreen = document.getElementById('loading-screen');
     const mainContent = document.getElementById('main-content');
     loadingScreen.classList.add('fade-out');
+    
+    // Adicione uma classe oculta à tela de carregamento após o fade-out
     setTimeout(() => {
         loadingScreen.style.display = 'none';
         mainContent.classList.remove('hidden');
-    }, 1000); // Ajuste o delay conforme necessário (deve ser igual à duração da animação)
+        mainContent.classList.add('fade-in'); // Adicione a classe fade-in
+    }, 1000); // O tempo aqui deve corresponder à duração da animação de fade-out
 }
 
+// Chame a função fadeOut após um atraso
 setTimeout(fadeOut, 4000);
