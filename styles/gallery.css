@@ -28,14 +28,14 @@
 .justified-gallery {
   width: 100%;
   position: relative;
-  overflow: auto;
+  overflow: hidden;
 }
 .justified-gallery > a,
 .justified-gallery > div,
 .justified-gallery > figure {
   position: absolute;
   display: inline-block;
-  overflow: auto;
+  overflow: hidden;
   background: #888888;
   filter: "alpha(opacity=10)";
   opacity: 0.1;
