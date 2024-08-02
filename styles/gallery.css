@@ -6,7 +6,7 @@
  */
 
  body {
-  background-color: black;
+  background-color: #141516;
   margin: 0;
   padding: 0;
   font-family: 'Lexend', sans-serif;
@@ -23,6 +23,7 @@
   background-position: center;
   z-index: -1;
   filter: blur(40px) brightness(0.5); /* Ajuste o valor do desfoque conforme necessário */
+  backdrop-filter: blur(15px); /* Efeito de vidro no botão */
 }
 
 .justified-gallery {
@@ -139,18 +140,39 @@
   border-radius: 6px;
 }
 
-/* Nav bar */
+:root {
+  --header-bg: rgba(46, 46, 46, 0.3);
+  --header-bg-hover: rgba(46, 46, 46, 0.4);
+  --header-shadow: rgba(0, 0, 0, 0.2);
+  --header-shadow-hover: rgba(0, 0, 0, 0.3);
+  --logo-color: #e2e2e2;
+  --logo-color-hover: #ccc;
+  --nav-filter-color: #ccc;
+  --nav-filter-bg-hover: rgba(46, 46, 46, 0.7);
+  --nav-filter-bg-active: rgba(255, 255, 255, 0.6);
+  --nav-filter-border-active: rgba(255, 255, 255, 0.2);
+  --nav-menu-color: #ccc;
+  --nav-menu-color-hover: #fff;
+  --nav-menu-underline: teal;
+}
+
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to right, rgba(46, 46, 46, 0.5), rgba(46, 46, 46, 0.7));
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  height: 50px;
-  backdrop-filter: blur(19px); /* Efeito de desfoque e brilho */
-  -webkit-backdrop-filter: blur(19px); /* Suporte para Safari */
-  padding: 0 20px; /* Espaçamento interno: apenas lateral */
-  margin: 0; /* Remove o margin da navbar */
+  background-color: var(--header-bg);
+  box-shadow: 0 2px 4px var(--header-shadow);
+  height: 60px;
+  padding: 0 30px;
+  margin: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px); /* Efeito de vidro */
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+header:hover {
+  background-color: var(--header-bg-hover);
+  box-shadow: 0 4px 8px var(--header-shadow-hover);
 }
 
 .logo-filters {
@@ -161,19 +183,32 @@ header {
 .logo {
   display: flex;
   align-items: center;
-  font-size: 16px; /* Ajuste o tamanho da fonte conforme necessário */
+
+  color: var(--logo-color);
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
 .logo img {
   height: 40px;
   margin-right: 10px;
+  transition: transform 0.3s;
+}
+
+.logo:hover img {
+  transform: scale(1.1);
 }
 
 .logo h1 {
-  margin: 0; /* Remove o margin padrão do h1 */
-  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
-  color: #1f1f1f; /* Cor do texto da logo */
-  font-size: 20px; /* Ajuste o tamanho da fonte conforme necessário */
+  margin: 0;
+  color: var(--logo-color);
+  font-size: 24px;
+  transition: color 0.3s;
+}
+
+.logo:hover h1 {
+  color: var(--logo-color-hover);
 }
 
 /* Estilo para os filtros como botões */
@@ -182,40 +217,47 @@ header {
   align-items: center;
   list-style-type: none;
   padding: 0;
-  margin: 0 0 0 10px; /* Espaçamento à esquerda da logo */
+  margin: 0 0 0 15px;
 }
 
 .nav-filters li {
-  position: relative; /* Necessário para o pseudo-elemento */
+  position: relative;
+  margin-right: 5px;
+}
+
+.nav-filters li:last-child {
+  margin-right: 0;
 }
 
 .nav-filters a {
   text-decoration: none;
-  color: #fff; /* Cor do texto dos botões */
-  padding: 15px; /* Espaço ao redor do texto dos botões */
-  background-color: rgba(46, 46, 46, 0.2); /* Cor de fundo dos botões */
-  transition: background-color 0.3s, transform 0.3s; /* Transições suaves */
+  color: var(--nav-filter-color);
+  padding: 8px 10px;
+  transition: background 0.3s, color 0.3s, border 0.3s, box-shadow 0.3s, transform 0.3s;
   display: flex;
   align-items: center;
   font-weight: bold;
-  position: relative;
-  overflow: hidden; /* Para esconder o pseudo-elemento */
+  border-radius: 4px;
+  border: 1px solid transparent;
+  backdrop-filter: blur(5px); /* Efeito de vidro no botão */
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.nav-filters a::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.5); /* Cor de fundo ao passar o mouse */
-  transition: left 0.3s;
-  z-index: -1; /* Colocar o pseudo-elemento atrás do texto */
+.nav-filters a:hover {
+  background-color: var(--nav-filter-bg-hover);
+  color: var(--logo-color-hover);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
 }
 
-.nav-filters a.active::before {
-  left: 0;
+.nav-filters a.active {
+  color: var(--logo-color);
+  border: 1px solid var(--nav-filter-border-active);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2), 0 0 9px 3px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1%, transparent 10%,transparent 10% , rgba(255, 255, 255, 0.05) 100%);
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2), 0 0 8px 1px rgba(255, 255, 255, 0.1);
+  font-size: 14px;
 }
 
 .nav-filters a span {
@@ -227,13 +269,8 @@ header {
   display: inline-block;
 }
 
-.nav-filters a:hover {
-  text-decoration: none; /* Remove o sublinhado ao passar o mouse */
-}
-
 .nav-filters a:active {
-  background-color: rgba(100, 100, 100, 0.5); /* Cor de fundo ao clicar */
-  transform: translateY(0); /* Remove o movimento ao clicar */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilo básico para o menu de navegação */
@@ -251,27 +288,32 @@ header {
 
 .nav-menu li a {
   text-decoration: none;
-  color: #ccc; /* Cor do texto padrão */
+  color: var(--nav-menu-color);
   padding: 5px 0;
   display: block;
-  font-weight: bold; /* Destaque o texto do menu */
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-menu li a:hover {
+  color: var(--nav-menu-color-hover);
 }
 
 /* Estilo para o item ativo */
 .nav-menu li.active a {
-  color: #fff;
+  color: var(--nav-menu-color-hover);
 }
 
 /* Estilo para o item ativo com sublinhado */
 .nav-menu li.active::after {
-  width: 100%; /* Linha sempre visível no item ativo */
-  box-shadow: 0 0 5px teal;
+  width: 100%;
+  box-shadow: 0 0 5px var(--nav-menu-underline);
 }
 
 /* Efeito quando o mouse passa sobre o item */
 .nav-menu li:hover::after {
-  width: 100%; /* Expande a linha para a largura total do item */
-  background: teal; /* Cor do sublinhado ao passar o mouse */
+  width: 100%;
+  background: var(--nav-menu-underline);
 }
 
 /* Pseudo-elemento para o sublinhado */
@@ -281,18 +323,42 @@ header {
   bottom: 0;
   left: 0;
   width: 0;
-  height: 2px; /* Altura da linha de sublinhado */
-  background: teal; /* Cor do sublinhado */
-  transition: width 0.5s ease; /* Transição suave */
+  height: 2px;
+  background: var(--nav-menu-underline);
+  transition: width 0.5s ease;
 }
 
-.nav-filters a.active {
-  background-color: rgba(100, 100, 100, 0.5); /* Cor de fundo do botão ativo */
-  color: #1a1a1a;
-}
+/* Responsividade */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+  
+  .logo {
+    margin-bottom: 10px;
+  }
 
-.nav-filters a.active span {
-  display: inline-block;
+  .nav-filters {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+
+  .nav-filters li {
+    margin: 5px 0;
+  }
+  
+  .nav-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+  
+  .nav-menu li {
+    margin: 5px 0;
+  }
 }
 
 /* Estilos para a barra de rolagem */
