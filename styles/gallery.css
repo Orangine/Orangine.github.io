@@ -163,7 +163,7 @@ header {
   background-color: var(--header-bg);
   box-shadow: 0 2px 4px var(--header-shadow);
   height: 60px;
-  padding: 0 30px;
+  padding: 0 20px;
   margin: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px); /* Efeito de vidro */
@@ -183,7 +183,6 @@ header:hover {
 .logo {
   display: flex;
   align-items: center;
-
   color: var(--logo-color);
   text-transform: uppercase;
   font-weight: bold;
@@ -192,7 +191,6 @@ header:hover {
 
 .logo img {
   height: 40px;
-  margin-right: 10px;
   transition: transform 0.3s;
 }
 
