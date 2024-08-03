@@ -153,7 +153,13 @@
   --nav-filter-border-active: rgba(255, 255, 255, 0.2);
   --nav-menu-color: #ccc;
   --nav-menu-color-hover: #fff;
-  --nav-menu-underline: teal;
+  --nav-menu-underline: linear-gradient(
+    315deg, 
+    hsl(213deg, 95%, 91%) 0.00%, 
+    hsl(248deg, 100%, 86%) 14.28%, 
+    hsl(293deg, 78%, 89%) 28.57%, 
+    hsl(213deg, 95%, 91%) 42.85%
+  );
 }
 
 header {
@@ -163,7 +169,7 @@ header {
   background-color: var(--header-bg);
   box-shadow: 0 2px 4px var(--header-shadow);
   height: 60px;
-  padding: 0 20px;
+  padding: 0 30px;
   margin: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px); /* Efeito de vidro */
@@ -187,6 +193,7 @@ header:hover {
   text-transform: uppercase;
   font-weight: bold;
   transition: color 0.3s;
+  margin-left: -18px;
 }
 
 .logo img {
@@ -248,15 +255,40 @@ header:hover {
   box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
 }
 
-.nav-filters a.active {
-  color: var(--logo-color);
-  border: 1px solid var(--nav-filter-border-active);
-  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2), 0 0 9px 3px rgba(255, 255, 255, 0.1);
-  transition: all 0.3s;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1%, transparent 10%,transparent 10% , rgba(255, 255, 255, 0.05) 100%);
-  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2), 0 0 8px 1px rgba(255, 255, 255, 0.1);
-  font-size: 14px;
+@keyframes pulseBorder {
+  0% {
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.1), 0 0 3px rgba(255, 255, 255, 0.1), 0 0 6px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.4), 0 0 3px rgba(255, 255, 255, 0.4), 0 0 6px rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.1), 0 0 3px rgba(255, 255, 255, 0.1), 0 0 6px rgba(255, 255, 255, 0.1);
+  }
 }
+
+.nav-filters a.active {
+  color: #141516;
+  border: 1px solid var(--nav-filter-border-active);
+  transition: all 0.3s;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1%, transparent 10%, transparent 10%, rgba(255, 255, 255, 0.05) 100%);
+  font-size: 14px;
+  background-image: linear-gradient(
+    315deg, 
+    hsl(213deg, 95%, 91%) 0.00%, 
+    hsl(248deg, 100%, 86%) 14.28%, 
+    hsl(293deg, 78%, 89%) 28.57%, 
+    hsl(213deg, 95%, 91%) 42.85%, 
+    hsl(248deg, 100%, 86%) 57.14%, 
+    hsl(293deg, 78%, 89%) 71.42%, 
+    hsl(213deg, 95%, 91%) 85.71%, 
+    hsl(248deg, 100%, 86%) 100.00%
+  );
+  background-size: 200% 200%;
+  animation: text 8s linear infinite, pulseBorder 2s infinite;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2), 0 0 8px 1px rgba(255, 255, 255, 0.1), 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
 
 .nav-filters a span {
   display: none;
