@@ -18,7 +18,6 @@ function init() {
     canvas = document.getElementById('webgl-canvas');
     document.body.style.margin = "0";
     document.body.style.touchAction = "none";
-    document.body.style.overflow = "hidden";
 
     renderer = new Renderer(canvas, dpr);
     renderer.setup();
