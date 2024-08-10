@@ -1,0 +1,212 @@
+html {
+    font-family: 'Roboto', sans-serif;
+    height: 100%; /* Garantir que o html ocupe 100% da altura */
+}
+
+body {
+    background-color: var(--background-color);
+    background-image: url('https://i.imgur.com/Qeu9hU6.jpg');
+    backdrop-filter: blur(100px) brightness(0.6);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+
+:root {
+    /* main */
+    --background-color: transparent;
+    --main-color: #151515;
+    --gradient-color: linear-gradient(#33A8C7, #52E3E1, #A0E426, #FDF148, #FFAB00, #F77976, #F050AE, #D883FF, #9336FD);
+    /* buttons */
+    --button-active-background: rgba(40, 40, 46, 0.5);
+    --button-active-background-hover: #606060;
+    --button-hover: #808080;
+    --text-color: rgba(190, 190, 190);
+    --text-color-hover: rgba(225, 225 , 225);
+}
+
+/* Estilo base para seções de conteúdo */
+.content-section {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Define a camada padrão para todas as seções */
+}
+
+/* Estilo para a seção de conteúdo visível */
+.content-section.show {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1; /* Garante que a seção visível fique acima das outras */
+}
+
+/* Estilo para o contêiner principal */
+.main-content {
+    position: relative; /* Permite que o conteúdo absoluto funcione corretamente */
+    flex-grow: 1;
+    padding: 20px;
+    background-color: var(--background-color);
+    margin-right: 10px;
+}
+
+.side-menu {
+    padding: 0 10px;
+    width: 250px;
+    transition: width 0.3s;
+    overflow: hidden;
+    position: relative; /* Adicione isso para controlar o posicionamento relativo do menu */
+    background-color: var(--background-color);
+}
+
+.side-menu.compact {
+    width: 50px;
+}
+
+.side-menu .website-name {
+    display: flex;
+    align-items: center;
+}
+
+.side-menu .website-name .logo-text {
+    margin-left: 5px;
+    transition: opacity 0.3s;
+}
+
+.side-menu.compact .website-name .logo-text {
+    opacity: 0; /* Oculta o texto da logo no modo compacto */
+    pointer-events: none; /* Impede a interação com o texto */
+}
+
+.side-menu .buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.side-menu .buttons .filter-button {
+    text-align: left;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.side-menu .buttons .filter-button .text {
+    margin-left: 10px;
+}
+
+.side-menu.compact .buttons .filter-button .text {
+    display: none;
+}
+
+.side-menu .toggle-menu {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-menu.compact .toggle-menu {
+    left: auto;
+    left: 0;
+}
+
+.side-menu.compact .toggle-menu i {
+    transform: rotate(0deg); /* Set the arrow direction */
+}
+
+.side-menu .toggle-menu i {
+    font-size: 16px;
+}
+
+.website-name {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.website-name img {
+    width: 50px;
+    margin-right: 5px;
+    margin-left: 1px;
+}
+
+.website-name p {
+    font-size: 15px; /* Tamanho fixo para evitar ajustes */
+    font-weight: 600;
+    white-space: nowrap; /* Evita a quebra de linha */
+    overflow: hidden; /* Oculta qualquer texto que ultrapasse o contêiner */
+    text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinhe os botões à esquerda */
+    white-space: nowrap; /* Evita a quebra de linha */
+}
+
+.filter-button:first-child {
+    margin-top: 15px;
+}
+
+.filter-button {
+    background-color: transparent; /* Fundo semi-transparente */
+    backdrop-filter: blur(10px); /* Efeito de desfoque */
+    border: 1px solid transparent;
+    padding: 25px 20px;
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    width: 100%;
+    text-align: left;
+    border-radius: 9px; /* Borda arredondada */
+    cursor: pointer;
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave */
+}
+
+.filter-button i {
+    margin-left: 2px;
+    margin-right: 5px;
+}
+
+.filter-button.active {
+    background-color: rgba(105, 105, 105, 0.4); /* Fundo mais claro para o botão ativo */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px); /* Aumenta o desfoque no estado ativo */
+    color: #fff;
+    text-shadow: 0 0 4px black;
+    border-radius: 9px;
+    font-weight: bold;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada no botão ativo */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave */
+}
+
+.filter-button:hover {
+    background-color: rgba(155, 155, 155, 0.1); /* Fundo mais claro para o botão ativo */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px); /* Leve aumento no desfoque */
+    color: var(--text-color-hover);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada no botão ativo */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave */
+}

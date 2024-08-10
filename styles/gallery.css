@@ -1,418 +1,107 @@
-/*!
- * justifiedGallery - v3.8.0
- * http://miromannino.github.io/Justified-Gallery/
- * Copyright (c) 2020 Miro Mannino
- * Licensed under the MIT license.
- */
-
- body {
-  background-color: #141516;
-  margin: 0;
-  padding: 0;
-  font-family: 'Lexend', sans-serif;
-  font-weight: 300;
+/* Geral */
+#gallery-content {
+    overflow-y: auto;
 }
 
-#background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
-  filter: blur(40px) brightness(0.5); /* Ajuste o valor do desfoque conforme necessário */
-  backdrop-filter: blur(15px); /* Efeito de vidro no botão */
-}
-
-.justified-gallery {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
-.justified-gallery > a,
-.justified-gallery > div,
-.justified-gallery > figure {
-  position: absolute;
-  display: inline-block;
-  overflow: hidden;
-  background: #888888;
-  filter: "alpha(opacity=10)";
-  opacity: 0.1;
-  margin: 0;
-  padding: 0;
-}
-.justified-gallery > a {
-  border: 2px solid rgba(255, 255, 255, 0.05); /* Ajuste a largura conforme necessário */
-}
-
-.justified-gallery > a > img,
-.justified-gallery > div > img,
-.justified-gallery > figure > img,
-.justified-gallery > a > a > img,
-.justified-gallery > div > a > img,
-.justified-gallery > figure > a > img,
-.justified-gallery > a > svg,
-.justified-gallery > div > svg,
-.justified-gallery > figure > svg,
-.justified-gallery > a > a > svg,
-.justified-gallery > div > a > svg,
-.justified-gallery > figure > a > svg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: 0;
-  padding: 0;
-  filter: "alpha(opacity=0)";
-  opacity: 0;
-}
-/* Estilo inicial do caption com efeito de vidro */
-.justified-gallery > a > .jg-caption,
-.justified-gallery > div > .jg-caption,
-.justified-gallery > figure > .jg-caption {
-  display: flex; /* Usar flexbox para centralizar o texto */
-  align-items: flex-end; /* Alinha o texto ao fundo */
-  position: absolute;
-  bottom: 5px;
-  padding: 5px;
-  background: rgba(0, 0, 0, 0.5); /* Fundo quase transparente */
-  backdrop-filter: blur(10px); /* Efeito de desfoque de fundo */
-  -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
-  left: 5px;
-  right: 5px;
-  margin: 0;
-  color: #ccc;
-  font-size: 15px;
-  font-weight: 400;
-  border-radius: 5px;
-  border: 2px solid rgba(255, 255, 255, 0.05); /* Borda suave para imitar vidro */
-  font-family: 'Lexend', sans-serif;
-  transform: translateY(120%); /* Inicia fora da tela */
-  transition: transform 0.2s ease-in; /* Transição suave */
-}
-
-/* Estilo do caption quando visível */
-.justified-gallery > a > .jg-caption.jg-caption-visible,
-.justified-gallery > div > .jg-caption.jg-caption-visible,
-.justified-gallery > figure > .jg-caption.jg-caption-visible {
-  transform: translateY(0); /* Move o caption para dentro da tela */
-}
-
-
-.justified-gallery > .jg-entry-visible {
-  filter: "alpha(opacity=100)";
-  opacity: 1;
-  background: none;
-}
-.justified-gallery > .jg-entry-visible > img,
-.justified-gallery > .jg-entry-visible > a > img,
-.justified-gallery > .jg-entry-visible > svg,
-.justified-gallery > .jg-entry-visible > a > svg {
-  filter: "alpha(opacity=100)";
-  opacity: 1;
-  -webkit-transition: opacity 500ms ease-in;
-  -moz-transition: opacity 500ms ease-in;
-  -o-transition: opacity 500ms ease-in;
-  transition: opacity 500ms ease-in;
-}
-.justified-gallery > .jg-filtered {
-  display: none;
-}
-.justified-gallery > .jg-spinner {
-  position: absolute;
-  bottom: 0;
-  margin-left: -24px;
-  padding: 10px 0 10px 0;
-  left: 50%;
-  filter: "alpha(opacity=100)";
-  opacity: 1;
-  overflow: initial;
-}
-.justified-gallery > .jg-spinner > span {
-  display: inline-block;
-  filter: "alpha(opacity=0)";
-  opacity: 0;
-  width: 8px;
-  height: 8px;
-  margin: 0 4px 0 4px;
-  background-color: #000;
-  border-radius: 6px;
-}
-
-:root {
-  --header-bg: rgba(46, 46, 46, 0.3);
-  --header-bg-hover: rgba(46, 46, 46, 0.4);
-  --header-shadow: rgba(0, 0, 0, 0.2);
-  --header-shadow-hover: rgba(0, 0, 0, 0.3);
-  --logo-color: #e2e2e2;
-  --logo-color-hover: #ccc;
-  --nav-filter-color: #ccc;
-  --nav-filter-bg-hover: rgba(46, 46, 46, 0.7);
-  --nav-filter-bg-active: rgba(255, 255, 255, 0.6);
-  --nav-filter-border-active: rgba(255, 255, 255, 0.2);
-  --nav-menu-color: #ccc;
-  --nav-menu-color-hover: #fff;
-  --nav-menu-underline: linear-gradient(
-    315deg, 
-    hsl(213deg, 95%, 91%) 0.00%, 
-    hsl(248deg, 100%, 86%) 14.28%, 
-    hsl(293deg, 78%, 89%) 28.57%, 
-    hsl(213deg, 95%, 91%) 42.85%
-  );
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--header-bg);
-  box-shadow: 0 2px 4px var(--header-shadow);
-  height: 60px;
-  padding: 0 30px;
-  margin: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px); /* Efeito de vidro */
-  transition: background 0.3s, box-shadow 0.3s;
-}
-
-header:hover {
-  background-color: var(--header-bg-hover);
-  box-shadow: 0 4px 8px var(--header-shadow-hover);
-}
-
-.logo-filters {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  color: var(--logo-color);
-  text-transform: uppercase;
-  font-weight: bold;
-  transition: color 0.3s;
-  margin-left: -18px;
-}
-
-.logo img {
-  height: 40px;
-  transition: transform 0.3s;
-}
-
-.logo:hover img {
-  transform: scale(1.1);
-}
-
-.logo h1 {
-  margin: 0;
-  color: var(--logo-color);
-  font-size: 24px;
-  transition: color 0.3s;
-}
-
-.logo:hover h1 {
-  color: var(--logo-color-hover);
-}
-
-/* Estilo para os filtros como botões */
-.nav-filters {
-  display: flex;
-  align-items: center;
-  list-style-type: none;
-  padding: 0;
-  margin: 0 0 0 15px;
-}
-
-.nav-filters li {
-  position: relative;
-  margin-right: 5px;
-}
-
-.nav-filters li:last-child {
-  margin-right: 0;
-}
-
-.nav-filters a {
-  text-decoration: none;
-  color: var(--nav-filter-color);
-  padding: 8px 10px;
-  transition: background 0.3s, color 0.3s, border 0.3s, box-shadow 0.3s, transform 0.3s;
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  backdrop-filter: blur(5px); /* Efeito de vidro no botão */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.nav-filters a:hover {
-  background-color: var(--nav-filter-bg-hover);
-  color: var(--logo-color-hover);
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
-}
-
-@keyframes pulseBorder {
-  0% {
-    box-shadow: 0 0 2px rgba(255, 255, 255, 0.1), 0 0 3px rgba(255, 255, 255, 0.1), 0 0 6px rgba(255, 255, 255, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 2px rgba(255, 255, 255, 0.4), 0 0 3px rgba(255, 255, 255, 0.4), 0 0 6px rgba(255, 255, 255, 0.4);
-  }
-  100% {
-    box-shadow: 0 0 2px rgba(255, 255, 255, 0.1), 0 0 3px rgba(255, 255, 255, 0.1), 0 0 6px rgba(255, 255, 255, 0.1);
-  }
-}
-
-.nav-filters a.active {
-  color: #141516;
-  border: 1px solid var(--nav-filter-border-active);
-  transition: all 0.3s;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1%, transparent 10%, transparent 10%, rgba(255, 255, 255, 0.05) 100%);
-  font-size: 14px;
-  background-image: linear-gradient(
-    315deg, 
-    hsl(213deg, 95%, 91%) 0.00%, 
-    hsl(248deg, 100%, 86%) 14.28%, 
-    hsl(293deg, 78%, 89%) 28.57%, 
-    hsl(213deg, 95%, 91%) 42.85%, 
-    hsl(248deg, 100%, 86%) 57.14%, 
-    hsl(293deg, 78%, 89%) 71.42%, 
-    hsl(213deg, 95%, 91%) 85.71%, 
-    hsl(248deg, 100%, 86%) 100.00%
-  );
-  background-size: 200% 200%;
-  animation: text 8s linear infinite, pulseBorder 2s infinite;
-  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2), 0 0 8px 1px rgba(255, 255, 255, 0.1), 0 0 15px rgba(255, 255, 255, 0.4);
-}
-
-
-.nav-filters a span {
-  display: none;
-  margin-left: 5px;
-}
-
-.nav-filters a.active span {
-  display: inline-block;
-}
-
-.nav-filters a:active {
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Estilo básico para o menu de navegação */
-.nav-menu {
-  display: flex;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-menu li {
-  position: relative;
-  margin: 0 15px;
-}
-
-.nav-menu li a {
-  text-decoration: none;
-  color: var(--nav-menu-color);
-  padding: 5px 0;
-  display: block;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-.nav-menu li a:hover {
-  color: var(--nav-menu-color-hover);
-}
-
-/* Estilo para o item ativo */
-.nav-menu li.active a {
-  color: var(--nav-menu-color-hover);
-}
-
-/* Estilo para o item ativo com sublinhado */
-.nav-menu li.active::after {
-  width: 100%;
-  box-shadow: 0 0 5px var(--nav-menu-underline);
-}
-
-/* Efeito quando o mouse passa sobre o item */
-.nav-menu li:hover::after {
-  width: 100%;
-  background: var(--nav-menu-underline);
-}
-
-/* Pseudo-elemento para o sublinhado */
-.nav-menu li::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--nav-menu-underline);
-  transition: width 0.5s ease;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    height: auto;
-    padding: 10px;
-  }
-  
-  .logo {
+/* Botões da Galeria */
+.gallery-buttons {
+    display: flex;
+    gap: 10px;
     margin-bottom: 10px;
-  }
-
-  .nav-filters {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 10px;
-  }
-
-  .nav-filters li {
-    margin: 5px 0;
-  }
-  
-  .nav-menu {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 10px;
-  }
-  
-  .nav-menu li {
-    margin: 5px 0;
-  }
 }
 
-/* Estilos para a barra de rolagem */
+/* Seção de Conteúdo */
+.content-section h1 {
+    margin-left: 10px;
+}
+
+/* Filtros da Galeria */
+.gallery-filter {
+    background-color: transparent;
+    border: none;
+    color: rgba(190, 190, 190, 1);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    margin-right: 8px;
+    cursor: pointer;
+    padding-bottom: 5px;
+    position: relative;
+    margin-left: 10px;
+}
+
+.gallery-filter:hover {
+    color: rgba(225, 225, 225, 1);
+}
+
+.gallery-filter.active {
+    color: #fff;
+}
+
+.gallery-filter::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.5s ease;
+}
+
+.gallery-filter:hover::after,
+.gallery-filter.active::after {
+    width: 100%;
+}
+
+/* Seletor de Filtro */
+.filter-per {
+    background-color: transparent;
+    padding: 10px;
+    padding-right: 30px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 400;
+    color: antiquewhite;
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23fff" class="bi bi-chevron-down" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/> </svg>'); /* Seta personalizada */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+
+.filter-per:hover {
+    background-color: #343435;
+    color: var(--text-color-hover);
+    border-color: var(--button-active-background-hover);
+}
+
+.filter-per:focus {
+    background-color: #343435;
+    color: var(--text-color-hover);
+    border-color: var(--button-active-background-hover);
+    outline: none;
+}
+
+/* Remover a seta padrão do IE/Edge */
+.filter-per::-ms-expand {
+    display: none;
+}
+
+/* Galeria de Imagens */
+.gallery-images a {
+    position: relative;
+    display: block;
+}
+
+/* Estilos para a Barra de Rolagem */
 ::-webkit-scrollbar {
-  width: 7px; /* Largura da barra de rolagem */
+    width: 1px;
 }
 
-/* Estilos para a alça da barra de rolagem */
 ::-webkit-scrollbar-thumb {
-  background: rgba(55, 55, 55, 0.5); /* Cor da alça da barra de rolagem */
-  border-radius: 10px; /* Borda arredondada */
-}
-
-/* Estilos para o fundo da barra de rolagem */
-::-webkit-scrollbar-track {
-  background-color: transparent; /* Fundo transparente */
-}
-
-/* Estilos para a área de visualização da barra de rolagem */
-::-webkit-scrollbar-track-piece {
-  background-color: transparent; /* Fundo transparente */
-}
-
-/* Estilos para o canto inferior direito da barra de rolagem */
-::-webkit-scrollbar-corner {
-  background-color: transparent; /* Fundo transparente */
+    background: transparent;
 }
