@@ -12,6 +12,9 @@ type = se a imagem é paisagem ou retrato.
 /* Lembre-se sempre de adicionar vírgula (,) no final das imagens, e a última imagem precisa ficar sem vírgula. */
 
 const images=[
+    /* em branco
+    {src:"-",thumb:"-",title:"-",author:"Orangine", date:"-", type:"-", wpp:"-"}
+    */
     {src:"https://i.imgur.com/icYM0WI.jpg",thumb:"https://i.imgur.com/fswBLZ6.jpeg",title:"The Firts Descendant",author:"Orangine", date:"15-07-2024", type:"paisagem", wpp:"não"},
     {src:"https://i.imgur.com/2uWqvkr.jpg",thumb:"https://i.imgur.com/Mbh8M2u.jpeg",title:"Remnant II",author:"Orangine", date:"21-07-2024", type:"paisagem", wpp:"não"},
     {src:"https://i.imgur.com/HASvvBC.jpg",thumb:"https://i.imgur.com/4ybcyVU.jpeg",title:"Life is Strange: True Colors",author:"Orangine", date:"21-05-2022", type:"paisagem", wpp:"sim"},
@@ -25,5 +28,7 @@ const images=[
     {src:"https://i.imgur.com/HJo0DoG.jpg",thumb:"https://i.imgur.com/JVMbJm1.jpeg",title:"Elden Ring",author:"Orangine", date:"27-07-2024", type:"paisagem", wpp:"sim"},
     {src:"https://i.imgur.com/ZCRbbK3.jpg",thumb:"https://i.imgur.com/XtegHx3.jpeg",title:"Red Dead Redemption 2",author:"Orangine", date:"06-03-2023", type:"retrato", wpp:"não"},
     {src:"https://i.imgur.com/6YnBhZJ.jpg",thumb:"https://i.imgur.com/fxIDp9a.jpeg",title:"Elden Ring",author:"Orangine", date:"01-08-2024", type:"retrato", wpp:"sim"},
-    {src:"https://i.imgur.com/JUqAjOZ.jpg",thumb:"https://i.imgur.com/nydE5nU.jpeg",title:"Elden Ring",author:"Orangine", date:"03-08-2024", type:"paisagem", wpp:"sim"}
+    {src:"https://i.imgur.com/JUqAjOZ.jpg",thumb:"https://i.imgur.com/nydE5nU.jpeg",title:"Elden Ring",author:"Orangine", date:"03-08-2024", type:"paisagem", wpp:"sim"},
+    {src:"https://i.imgur.com/dRKCcse.jpeg",thumb:"https://i.imgur.com/E0mekhX.jpeg",title:"Baldur's Gate 3",author:"Orangine", date:"02-09-2024", type:"retrato", wpp:"não"},
+    {src:"https://i.imgur.com/54WWKZ4.jpeg",thumb:"https://i.imgur.com/F0RN8NN.jpeg",title:"Baldur's Gate 3",author:"Orangine", date:"02-09-2024", type:"paisagem", wpp:"não"}
 ];
