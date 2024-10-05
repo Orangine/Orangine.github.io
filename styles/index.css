@@ -1,0 +1,501 @@
+        /* Configuração global */
+html {
+    font-family: 'Roboto', sans-serif;
+    height: 100%; /* Garantir que o html ocupe 100% da altura */
+}
+
+body {
+    background-color: var(--background-color);
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+/* Variáveis de Cores */
+:root {
+    /* main */
+    --background-color: #151515;
+    --main-color: #151515;
+    --gradient-color: linear-gradient(#33A8C7, #52E3E1, #A0E426, #FDF148, #FFAB00, #F77976, #F050AE, #D883FF, #9336FD);
+
+    /* buttons */
+    --button-active-background: rgba(40, 40, 46, 0.5);
+    --button-active-background-hover: #606060;
+    --button-hover: #808080;
+    --text-color: rgba(190, 190, 190);
+    --text-color-hover: rgba(225, 225 , 225);
+}
+
+.content-section.show {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1; /* Garante que a seção visível fique acima das outras */
+}
+
+/* Botões da Galeria */
+.gallery-buttons {
+    display: flex;
+}
+
+.gallery-filter {
+    background-color: transparent;
+    border: none;
+    color: rgba(190, 190, 190, 1);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    margin-right: 2px;
+    cursor: pointer;
+    position: relative;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+}
+
+.gallery-buttons p {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    margin-left: 40px;
+}
+
+.gallery-filter:hover {
+    color: rgba(225, 225, 225, 1);
+}
+
+.gallery-filter.active {
+    color: #fff;
+}
+
+.gallery-filter::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.5s ease;
+}
+
+.gallery-filter:hover::after,
+.gallery-filter.active::after {
+    width: 100%;
+}
+
+/* Galeria de Imagens */
+.gallery-images a {
+    position: relative;
+    display: block;
+}
+
+
+/* Justified Gallery */
+.justified-gallery {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .justified-gallery > a,
+  .justified-gallery > div,
+  .justified-gallery > figure {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    background: #888888;
+    filter: "alpha(opacity=10)";
+    opacity: 0.1;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .justified-gallery > a {
+    border: 2px solid transparent; /* Borda inicial transparente */
+    border-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)); /* Gradiente padrão */
+    border-image-slice: 1; /* Aplica o gradiente à borda */
+    transition: border 0.3s ease, border-image 0.3s ease;
+  }
+  
+  .justified-gallery > a:hover {
+    border: 2px solid transparent;
+  }
+  
+  .justified-gallery > a > img,
+  .justified-gallery > div > img,
+  .justified-gallery > figure > img,
+  .justified-gallery > a > a > img,
+  .justified-gallery > div > a > img,
+  .justified-gallery > figure > a > img,
+  .justified-gallery > a > svg,
+  .justified-gallery > div > svg,
+  .justified-gallery > figure > svg,
+  .justified-gallery > a > a > svg,
+  .justified-gallery > div > a > svg,
+  .justified-gallery > figure > a > svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    padding: 0;
+    filter: "alpha(opacity=0)";
+    opacity: 0;
+  }
+  /* Estilo inicial do caption com efeito de vidro */
+  .justified-gallery > a > .jg-caption,
+  .justified-gallery > div > .jg-caption,
+  .justified-gallery > figure > .jg-caption {
+    display: flex; /* Usar flexbox para centralizar o texto */
+    align-items: flex-end; /* Alinha o texto ao fundo */
+    position: absolute;
+    bottom: 0;
+    padding: 5px;
+    background: rgba(10, 10, 10, 0.2); /* Fundo quase transparente */
+    backdrop-filter: blur(10px); /* Efeito de desfoque de fundo */
+    -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
+    left: 0;
+    right: 0;
+    margin: 0;
+    color: #ccc;
+    font-size: 15px;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    text-shadow: 0px 0px 4px black;
+    transform: translateY(120%); /* Inicia fora da tela */
+    transition: transform 0.2s ease-in; /* Transição suave */
+  }
+  
+  /* Estilo do caption quando visível */
+  .justified-gallery > a > .jg-caption.jg-caption-visible,
+  .justified-gallery > div > .jg-caption.jg-caption-visible,
+  .justified-gallery > figure > .jg-caption.jg-caption-visible {
+    transform: translateY(0); /* Move o caption para dentro da tela */
+  }
+  
+  
+  .justified-gallery > .jg-entry-visible {
+    filter: "alpha(opacity=100)";
+    opacity: 1;
+    background: none;
+  }
+  .justified-gallery > .jg-entry-visible > img,
+  .justified-gallery > .jg-entry-visible > a > img,
+  .justified-gallery > .jg-entry-visible > svg,
+  .justified-gallery > .jg-entry-visible > a > svg {
+    filter: "alpha(opacity=100)";
+    opacity: 1;
+    -webkit-transition: opacity 500ms ease-in;
+    -moz-transition: opacity 500ms ease-in;
+    -o-transition: opacity 500ms ease-in;
+    transition: opacity 500ms ease-in;
+  }
+  .justified-gallery > .jg-filtered {
+    display: none;
+  }
+  .justified-gallery > .jg-spinner {
+    position: absolute;
+    bottom: 0;
+    margin-left: -24px;
+    padding: 10px 0 10px 0;
+    left: 50%;
+    filter: "alpha(opacity=100)";
+    opacity: 1;
+    overflow: initial;
+  }
+  .justified-gallery > .jg-spinner > span {
+    display: inline-block;
+    filter: "alpha(opacity=0)";
+    opacity: 0;
+    width: 8px;
+    height: 8px;
+    margin: 0 4px 0 4px;
+    background-color: #000;
+    border-radius: 6px;
+  }
+
+  /* Scroll-bar */
+
+  ::-webkit-scrollbar {
+    width: 7px; /* Largura da barra de rolagem */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(55, 55, 55, 0.5); /* Cor da alça da barra de rolagem */
+    border-radius: 10px; /* Borda arredondada */
+  }
+
+
+/* Seções e Conteúdos */
+.main-content {
+    position: relative;
+    flex-grow: 1;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+.row {
+    display: flex;
+    align-items: center; /* Alinha verticalmente no centro */
+    justify-content: center; /* Centraliza todos os itens horizontalmente */
+    width: 100%; /* Ocupa toda a largura disponível */
+    position: relative; /* Para o posicionamento relativo da .search-box */
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+        /* Switch */
+        .switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    width: 225px;
+    background: #252525;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-right: 20px; /* Adiciona um espaçamento entre o switch e a search bar */
+    }
+
+        .switch-label {
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+            float: left;
+            width: 75px;
+            line-height: 25px;
+            font-size: 12px;
+            color: #676a6c;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .switch-input {
+            display: none;
+        }
+
+        .switch-input:checked + .switch-label {
+            color: #f0f0f0;
+            transition: 0.15s ease-out;
+            transition-property: color, text-shadow;
+            text-shadow: 0px 0px 10px black;
+        }
+
+        .switch-input:checked + .switch-label-y ~ .switch-selector {
+            transform: translateX(0%);
+            background-color: #999999;
+        }
+        .switch-input:checked + .switch-label-i ~ .switch-selector {
+            transform: translateX(100%);
+            background-color: #999999;
+        }
+        .switch-input:checked + .switch-label-n ~ .switch-selector {
+            transform: translateX(200%);
+            background-color: #999999;
+        }
+
+        .switch-selector {
+            position: absolute;
+            z-index: 1;
+            top: 0px;
+            left: 0px;
+            display: block;
+            width: 75px;
+            height: 25px;
+            border-radius: 5px;
+            background-color: #1ab394;
+            transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+
+        /* Search Bar */
+        .search-box {
+    display: flex;
+    align-items: center;
+    position: absolute; /* Para manter a posição fixa */
+    right: 10px; /* Alinha a search bar à direita */
+    top: 0; /* Alinha ao topo da row */
+}
+
+        .input-search {
+            height: 25px;
+            width: 0px;
+            border-style: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            outline: none;
+            border-radius: 25px;
+            transition: all .5s ease-in-out;
+            background-color: transparent;
+            color: #fff;
+        }
+
+        .input-search::placeholder {
+            color: rgba(255, 255, 255, .5);
+            font-size: 14px;
+            letter-spacing: 2px;
+            font-weight: 100;
+        }
+
+        .btn-search {
+            width: 20px;
+            height: 20px;
+            border-style: none;
+            font-size: 17px;
+            font-weight: bold;
+            outline: none;
+            cursor: pointer;
+            border-radius: 50%;
+            position: absolute;
+            right: 0px;
+            color: #ffffff;
+            background-color: transparent;
+            pointer-events: painted;
+        }
+
+        .btn-search:focus ~ .input-search {
+            width: 300px;
+            border-radius: 0px;
+            background-color: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, .5);
+            transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+        }
+
+        .input-search:focus {
+            width: 300px;
+            border-radius: 0px;
+            background-color: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, .5);
+            transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+        }
+
+        .btn-search.active {
+            color: rgb(127, 216, 88); /* Escolha a cor desejada */
+            text-shadow: 0px 0px 4px #1ab394;
+        }
+        
+
+        /* Logo e Nome */
+
+        .website-name{ 
+            display: flex;
+            position: absolute;
+            align-items: center;
+            left: 10px;
+        }
+
+        .website-name p {
+            font-size: 20px;
+        }
+
+        .website-name img {
+            width: 30px;
+            height: auto;
+            margin-right: 5px;
+        }
+
+
+/* Tela de carregamento */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #050505;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    overflow: hidden; /* Impede a rolagem dentro da tela de carregamento */
+    opacity: 1;
+    transition: opacity 1s ease-out; /* Adiciona a transição de opacidade */
+}
+
+#loading-screen img {
+    width: 50px;
+    height: auto;
+}
+
+/* Impede rolagem do corpo quando a tela de carregamento está visível */
+body.loading {
+    overflow: hidden;
+}
+
+/* Spinner */
+.spinner {
+    border: 4px solid #f3f3f3; /* Diminui a espessura do spinner */
+    border-top: 4px solid #db8d34; /* Cor do topo do spinner */
+    border-radius: 50%;
+    width: 20px; /* Diminui o tamanho do spinner */
+    height: 20px; /* Diminui o tamanho do spinner */
+    position: absolute; /* Para posicionar o spinner dentro do loading-content */
+    bottom: 10px; /* Margem inferior */
+    right: 10px; /* Margem direita */
+    animation: spin 1s linear infinite; /* Mantém a animação */
+}
+
+/* Animação do spinner */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Imagem de fundo com gradiente */
+#loading-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(225, 225, 225, 0) 0%, rgba(255, 255, 255, 0.5) 100%);
+    filter: opacity(0.3) blur(75px) brightness(0.5);
+    background-size: 200% 100%;
+    animation: gradientShift 5s ease infinite; /* Animação do gradiente */
+}
+
+@keyframes gradientShift {
+    0% { background-position: 100% 0; }
+    100% { background-position: 0 0; }
+}
+
+/* Área de conteúdo de carregamento */
+.loading-content {
+    position: relative;
+    width: 750px;
+    height: 350px;
+    background-color: rgba(0, 0, 0, 0.8); /* Área preta com um pouco de opacidade */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001; /* Para garantir que fique acima do loading image */
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px black;
+}
+
+/* Logo */
+#loading-screen img {
+    width: 100px; /* Ajuste conforme necessário */
+    height: auto;
+    margin-bottom: 20px; /* Espaçamento abaixo da logo */
+}
+
+/* Nome do site */
+.site-name {
+    color: white;
+    font-size: 34px; /* Ajuste conforme necessário */
+    margin: 10px 0;
+}
+
+/* Texto de carregamento */
+.loading-text {
+    color: white;
+    font-size: 16px; /* Ajuste conforme necessário */
+    margin: 10px 0;
+}
+
+    

@@ -5,121 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="images/logo.png" type="image/x-icon">
     <title>Pixel Memories</title>
-
-    <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <!-- CSS Stylesheets -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/gallery.css">
-    <link rel="stylesheet" href="styles/home.css">
-    <link rel="stylesheet" href="styles/jgallery.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/balloon-css@1.2.0/balloon.min.css" rel="stylesheet">
-
-    <!-- JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/colorthief@2.4.0/dist/color-thief.min.js"></script>
-
-    <!-- Custom Scripts -->
+    <link rel="stylesheet" href="styles/index.css" />
+    <script src="scripts/index.js"></script>
     <script src="images.js"></script>
-    <script src="scripts/wallpappers.js"></script>
-    <script src="scripts/script.js"></script>
 </head>
 <body>
-    <!-- Side Menu -->
-    <div class="side-menu">
-        <div class="website-name">
-            <img src="images/logo.png" alt="Logo"/>
-            <p class="logo-text">Pixel Memories</p>
-        </div>    
-
-        <div class="buttons">
-            <button class="filter-button active" data-target="home-content">
-                <i class="fas fa-home"></i>
-                <span class="text">Início</span>
-            </button>
-            <button class="filter-button" data-target="gallery-content">
-                <i class="fas fa-image"></i>
-                <span class="text">Galeria</span>
-            </button>
+    <div id="loading-screen">
+        <div id="loading-image"></div>
+        <div class="loading-content">
+            <img src="images/Pixel Memories Logo.png" alt="Pixel Memories Logo" class="logo">
+            <h1 class="site-name">PIXEL MEMORIES</h1>
+            <p class="loading-text">O mundo através das capturas.</p>
+            <div class="spinner"></div>
         </div>
-        <button class="toggle-menu" title="Esconder Menu">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-    </div>
-
-    <!-- Main Content -->
-    <div class="main-content">
-
-        <!-- Home Content -->
-        <div id="home-content" class="content-section show">
-            <div class="grid">
-                <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M490 401V537H348.5V401H490ZM490 785.5V676H348.5V785.5H347.5V676H206V785.5H205V676H63.5V785.5H62.5V676H0V675H62.5V538H0V537H62.5V401H0V400H62.5V258H0V257H62.5V116H0V115H62.5V0H63.5V115L205 115V0H206V115L347.5 115V0H348.5V115H490V0H491V115L627.5 115V0H628.5V115H765V0H766V115L902.5 115V0H903.5V115H982V116H903.5V257H982V258H903.5V400H982V401H903.5V537H982V538H903.5V675H982V676H903.5V785.5H902.5V676H766V785.5H765V676H628.5V785.5H627.5V676H491V785.5H490ZM902.5 675V538H766V675H902.5ZM902.5 537V401H766V537H902.5ZM902.5 400V258H766V400H902.5ZM902.5 257V116L766 116V257H902.5ZM627.5 675H491V538H627.5V675ZM765 675H628.5V538H765V675ZM348.5 675H490V538H348.5V675ZM347.5 538V675H206V538H347.5ZM205 538V675H63.5V538H205ZM765 537V401H628.5V537H765ZM765 400V258H628.5V400H765ZM765 257V116H628.5V257H765ZM347.5 401V537H206V401H347.5ZM205 401V537H63.5V401H205ZM627.5 401V537H491V401H627.5ZM627.5 116L491 116V257H627.5V116ZM627.5 258H491V400H627.5V258ZM63.5 257V116L205 116V257H63.5ZM63.5 400V258H205V400H63.5ZM206 116V257H347.5V116L206 116ZM348.5 116V257H490V116H348.5ZM206 400V258H347.5V400H206ZM348.5 258V400H490V258H348.5Z" fill="url(#paint0_radial_1_8)" />
-                    <defs>
-                        <radialGradient id="paint0_radial_1_8" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(491 392.75) rotate(90) scale(513.25 679.989)">
-                            <stop stop-color="white" stop-opacity="0.2" />
-                            <stop offset="1" stop-color="#000" stop-opacity="0" />
-                        </radialGradient>
-                    </defs>
-                </svg>
-                <div class="blur"></div>
+    </div>    
+     <!-- Main Content -->
+     <div class="main-content">
+        <div class="row">
+            <div class="website-name"><img src="images/Pixel Memories Logo.png" alt="Pixel Memories"><p>PIXEL MEMORIES</p></div>
+            <div class="switch">
+                <input id="switch-y" name="filter" type="radio" value="Paisagem" class="switch-input" />
+                <label for="switch-y" class="switch-label switch-label-y">Paisagem</label>
+                <input id="switch-i" name="filter" type="radio" value="I" class="switch-input" checked />
+                <label for="switch-i" class="switch-label switch-label-i">Tudo</label>
+                <input id="switch-n" name="filter" type="radio" value="Retrato" class="switch-input" />
+                <label for="switch-n" class="switch-label switch-label-n">Retrato</label>
+                <span class="switch-selector"></span>
             </div>
-            <div class="title">
-                <p>O MUNDO ATRAVÉS DAS</p>
-                <p>CAPTURAS.</p>
-                <p>Amo mostrar ao mundo real os lugares incríveis que exploramos nos universos digitais.</p>
+            <div class="search-box">
+                <button class="btn-search"><i class="fas fa-search"></i></button>
+                <input type="text" id="search-input" class="input-search" placeholder="Pesquise um jogo ou autor...">
             </div>
-            <div class="introduction">
-                <button class="balloon" aria-label="Eai!" data-balloon-pos="up"><img src="images/avatar.jpg" alt="Orangine"></button>
-                <div class="text-content">
-                    <h1>ORANGINE</h1>
-                    <p>Cada screenshot captura não apenas um momento do jogo, mas também uma parte da minha jornada, transformando pixels em memórias eternas.</p>
-                </div>
-            </div>
-            <div class="wallpaper-download">
-                <h2>Wallpapers Sugeridos</h2>
-                <div class="wallpaper-gallery">
-                    <div class="wallpaper-gallery justified-gallery" id="gallery"></div>
-                </div>
-            </div>
-            <footer>
-                <div class="social-icons">
-                    <a href="#" target="_blank">
-                        <i class="fa-brands fa-twitter"></i>
-                    </a>
-                    <a href="#" target="_blank">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="#" target="_blank">
-                        <i class="fa-brands fa-discord"></i>
-                    </a>
-                </div>
-            </footer>
-        </div>        
-
+        </div>
         <!-- Gallery Content -->
         <div id="gallery-content" class="content-section">
-            <h1>Galeria</h1>
-            <div class="gallery-buttons">
-                <button class="gallery-filter active">Tudo</button>
-                <button class="gallery-filter">Paisagem</button>
-                <button class="gallery-filter">Retrato</button>
-            </div>
-            <label>Filtrar por: </label>
-            <select name="filter" class="filter-per" id="filter-per">
-                <option value="decrescente">Mais Novas</option>
-                <option value="crescente">Mais Antigas</option>
-            </select>
             <div class="gallery-images" id="gallery-images"></div>
         </div>
-
     </div>
 </body>
 </html>
+

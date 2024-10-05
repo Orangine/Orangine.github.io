@@ -1,16 +1,3 @@
-/* 
-Você pode adicionar as imagens aqui:
-src = imagem com a melhor qualidade; 
-thumb = imagem para a thumbnail para evitar sobrecarregar a galeria; 
-title = nome do jogo; 
-author = quem tirou a screenshot; 
-date = data da screenshot;
-* A data está no formato AAAA-DD-MM.
-type = se a imagem é paisagem ou retrato. 
-*/
-
-/* Lembre-se sempre de adicionar vírgula (,) no final das imagens, e a última imagem precisa ficar sem vírgula. */
-
 const images=[
     /* em branco
     {src:"-",thumb:"-",title:"-",author:"Orangine", date:"-", type:"-", wpp:"-"}
@@ -30,5 +17,9 @@ const images=[
     {src:"https://i.imgur.com/6YnBhZJ.jpg",thumb:"https://i.imgur.com/fxIDp9a.jpeg",title:"Elden Ring",author:"Orangine", date:"01-08-2024", type:"retrato", wpp:"sim"},
     {src:"https://i.imgur.com/JUqAjOZ.jpg",thumb:"https://i.imgur.com/nydE5nU.jpeg",title:"Elden Ring",author:"Orangine", date:"03-08-2024", type:"paisagem", wpp:"sim"},
     {src:"https://i.imgur.com/dRKCcse.jpeg",thumb:"https://i.imgur.com/E0mekhX.jpeg",title:"Baldur's Gate 3",author:"Orangine", date:"02-09-2024", type:"retrato", wpp:"não"},
-    {src:"https://i.imgur.com/54WWKZ4.jpeg",thumb:"https://i.imgur.com/F0RN8NN.jpeg",title:"Baldur's Gate 3",author:"Orangine", date:"02-09-2024", type:"paisagem", wpp:"não"}
+    {src:"https://i.imgur.com/54WWKZ4.jpeg",thumb:"https://i.imgur.com/F0RN8NN.jpeg",title:"Baldur's Gate 3",author:"Orangine", date:"02-09-2024", type:"paisagem", wpp:"não"},
+    {src:"https://i.imgur.com/eJPJHRK.jpeg",thumb:"https://i.imgur.com/NW4oWxu.jpeg",title:"Borderlands 2",author:"Orangine", date:"02-10-2024", type:"retrato", wpp:"sim"},
+    {src:"https://i.imgur.com/g3LQ7AD.jpeg",thumb:"https://i.imgur.com/vGrx5Ou.jpeg",title:"Star Wars Jedi: Survivor",author:"Orangine", date:"18-09-2024", type:"paisagem", wpp:"sim"},
+    {src:"https://i.imgur.com/HaXolhy.jpeg",thumb:"https://i.imgur.com/VF4eHM1.jpeg",title:"Baldur's Gate 3",author:"Orangine", date:"25-08-2024", type:"paisagem", wpp:"sim"},
+    {src:"https://i.imgur.com/4vyIsv2.jpeg",thumb:"https://i.imgur.com/VBOMnxx.jpeg",title:"Star Wars Jedi: Survivor",author:"Orangine", date:"16-09-2024", type:"paisagem", wpp:"sim"}
 ];
