@@ -2,7 +2,7 @@ const images=[
     /* em branco
     {src:"-",thumb:"-",title:"-",author:"Orangine", date:"-", type:"-", wpp:"-"}
     */
-    {src:"https://i.imgur.com/icYM0WI.jpg",thumb:"https://i.imgur.com/fswBLZ6.jpeg",title:"The Firts Descendant",author:"Orangine", date:"15-07-2024", type:"paisagem", wpp:"não"},
+    {src:"https://i.imgur.com/icYM0WI.jpg",thumb:"https://i.imgur.com/fswBLZ6.jpeg",title:"The First Descendant",author:"Orangine", date:"15-07-2024", type:"paisagem", wpp:"não"},
     {src:"https://i.imgur.com/2uWqvkr.jpg",thumb:"https://i.imgur.com/Mbh8M2u.jpeg",title:"Remnant II",author:"Orangine", date:"21-07-2024", type:"paisagem", wpp:"não"},
     {src:"https://i.imgur.com/HASvvBC.jpg",thumb:"https://i.imgur.com/4ybcyVU.jpeg",title:"Life is Strange: True Colors",author:"Orangine", date:"21-05-2022", type:"paisagem", wpp:"sim"},
     {src:"https://i.imgur.com/6feIXZr.jpg",thumb:"https://i.imgur.com/jWUpjpO.jpeg",title:"Throne and Liberty",author:"Orangine", date:"18-07-2024", type:"retrato", wpp:"não"},
