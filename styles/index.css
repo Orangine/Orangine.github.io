@@ -32,7 +32,7 @@ body {
 .content-section.show {
     opacity: 1;
     visibility: visible;
-    z-index: 1; /* Garante que a seção visível fique acima das outras */
+    z-index: 1;
 }
 
 /* Botões da Galeria */
@@ -47,10 +47,8 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 16px;
-    margin-right: 2px;
+    margin: 0 2px 0 10px;
     cursor: pointer;
-    position: relative;
-    margin-left: 10px;
     transition: color 0.3s ease;
 }
 
@@ -62,12 +60,9 @@ body {
     margin-left: 40px;
 }
 
-.gallery-filter:hover {
-    color: rgba(225, 225, 225, 1);
-}
-
+.gallery-filter:hover,
 .gallery-filter.active {
-    color: #fff;
+    color: rgba(225, 225, 225, 1);
 }
 
 .gallery-filter::after {
