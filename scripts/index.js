@@ -1,35 +1,35 @@
 document.addEventListener('DOMContentLoaded', function() {
     const galleryImagesContainer = document.getElementById('gallery-images');
     const searchInput = document.getElementById('search-input');
+    const suggestionsContainer = document.getElementById('suggestions'); // Contêiner para sugestões
     const switchInputs = document.querySelectorAll('.switch-input');
 
-    // Não é mais necessário buscar os dados de uma planilha Google Sheets, pois estamos usando o arquivo images.js
     function fetchImagesData() {
-        return images // Usamos diretamente o array images do arquivo images.js
+        return images
             .map((image, index) => ({
-                ...image, // Mantém as propriedades da imagem
-                index: index // Adiciona o índice para manter a ordem de adição
+                ...image,
+                index: index
             }))
             .sort((a, b) => {
                 const dateA = convertToDate(a.date);
                 const dateB = convertToDate(b.date);
 
                 if (dateA.getTime() !== dateB.getTime()) {
-                    return dateB.getTime() - dateA.getTime(); // Ordena por data decrescente
+                    return dateB.getTime() - dateA.getTime();
                 }
 
-                return b.index - a.index; // Ordena pela ordem de adição se as datas forem iguais
+                return b.index - a.index;
             });
     }
 
     function getAuthorStyle(author) {
         switch(author) {
             case 'Orangine':
-                return 'color: orange;';
+                return 'color: orange; text-shadow: 0px 0px 4px black;';
             case 'Jujuba':
-                return 'color: rgb(169, 48, 255);';
+                return 'color: rgb(169, 48, 255); text-shadow: 0px 0px 4px black;';
             default:
-                return 'color: white;'; // Estilo padrão
+                return 'color: white;';
         }
     }
 
@@ -144,20 +144,79 @@ document.addEventListener('DOMContentLoaded', function() {
         renderGalleryImages(filteredImages);
     }
 
+    // Modificação na parte onde as sugestões são exibidas
+    searchInput.addEventListener('input', function() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        
+        const searchButton = document.querySelector('.btn-search'); 
+        if (searchTerm !== '') {
+            searchButton.classList.add('active');
+        } else {
+            searchButton.classList.remove('active');
+        }
+        
+        if (searchTerm === '') {
+            updateGallery(); 
+            suggestionsContainer.innerHTML = ''; 
+            suggestionsContainer.style.display = 'none'; 
+            return;
+        }
+        
+        suggestionsContainer.innerHTML = ''; 
+        const uniqueTitles = new Set(); 
+        const uniqueAuthors = new Set(); 
+        const lastWord = searchTerm.split(' ').pop(); 
+    
+        // Primeiro, verificamos os autores
+        images.forEach(image => {
+            const author = image.author.toLowerCase();
+    
+            // Verifica se o autor contém a última palavra digitada
+            if (author.includes(lastWord) && !uniqueAuthors.has(author)) {
+                uniqueAuthors.add(author);
+                const suggestionItem = document.createElement('div');
+                suggestionItem.classList.add('suggestion-item');
+                const authorStyle = getAuthorStyle(image.author); 
+                suggestionItem.innerHTML = `<i>Autor:</i> <span style="${authorStyle}">${image.author}</span>`;
+                suggestionItem.addEventListener('click', function() {
+                    searchInput.value = image.author; 
+                    suggestionsContainer.innerHTML = ''; 
+                    suggestionsContainer.style.display = 'none'; 
+                    updateGallery(); 
+                });
+                suggestionsContainer.appendChild(suggestionItem);
+            }
+        });
+    
+        // Agora, verificamos os títulos
+        images.forEach(image => {
+            const title = image.title.toLowerCase();
+    
+            // Verifica se o título contém a última palavra digitada
+            if (title.includes(lastWord) && !uniqueTitles.has(title)) {
+                uniqueTitles.add(title);
+                const suggestionItem = document.createElement('div');
+                suggestionItem.classList.add('suggestion-item');
+                suggestionItem.innerHTML = `${image.title}`; // Sugestão de título
+                suggestionItem.addEventListener('click', function() {
+                    searchInput.value = image.title; 
+                    suggestionsContainer.innerHTML = ''; 
+                    suggestionsContainer.style.display = 'none'; 
+                    updateGallery(); 
+                });
+                suggestionsContainer.appendChild(suggestionItem);
+            }
+        });
+    
+        // Exibe o container se houver sugestões
+        suggestionsContainer.style.display = uniqueTitles.size || uniqueAuthors.size ? 'block' : 'none'; 
+        updateGallery();
+    });    
+
+    
     switchInputs.forEach(input => {
         input.addEventListener('change', updateGallery);
     });
-
-    searchInput.addEventListener('input', function() {
-        // Adiciona ou remove a classe 'active' ao botão de pesquisa
-        if (searchInput.value.trim() !== "") {
-            document.querySelector('.btn-search').classList.add('active');
-        } else {
-            document.querySelector('.btn-search').classList.remove('active');
-        }
-        updateGallery(); // Certifique-se de que a função updateGallery seja chamada para filtrar as imagens
-    });
-    
 
     // Inicializa a exibição da galeria
     updateGallery();
