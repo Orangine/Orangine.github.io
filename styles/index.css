@@ -14,10 +14,122 @@ body {
     height: 100vh;
 }
 
+.circles {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle-two {
+  height: 150px;
+  width: 150px;
+  top: 20%;
+  translate: -50% -50%;
+  animation: right 30s ease infinite;
+}
+
+.circle-one {
+  height: 250px;
+  width: 250px;
+  top: 10%;
+  left: 10%;
+  translate: -50% -50%;
+  animation: pulse 10s ease infinite;
+}
+
+.circle-three {
+  height: 100px;
+  width: 100px;
+  top: 95%;
+  right: -20%;
+  translate: -50% -50%;
+  animation: left 30s ease infinite;
+}
+
+.background {
+  height: 100vh;
+  width: 100vw;
+  top:0;
+  left: 0;
+  position: absolute;
+  backdrop-filter: blur(50px);
+  place-content: center;
+
+}
+
+@keyframes right {
+  0% {
+    top: 20%;
+    left: -80%;
+  }
+  20% {
+    top: 40%;
+    left: -70%;
+  }
+  40% {
+    top: 30%;
+    left: -30%;
+  }
+  60% {
+    top: 70%;
+    left: -10%;
+  }
+  80% {
+    top: 0%;
+    left: 100%;
+  }
+  100% {
+    top: 20%;
+    left: -80%;
+  }
+}
+
+@keyframes left {
+  0% {
+    top: 95%;
+    right: -20%;
+  }
+  20% {
+    top: 70%;
+    right: -80%;
+  }
+  40% {
+    top: 30%;
+    right: -30%;
+  }
+  60% {
+    top: 70%;
+    right: -10%;
+  }
+  80% {
+    top: 0%;
+    right: 100%;
+  }
+  100% {
+    top: 20%;
+    right: -80%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    height: 350px;
+    width: 350px;
+  }
+  50% {
+    height: 250px;
+    width: 250px;
+  }
+  100% {
+    height: 350px;
+    width: 350px;
+  }
+}
+
+
 /* Variáveis de Cores */
 :root {
     /* main */
-    --background-color: #151515;
+    --background-color: #101010;
     --main-color: #151515;
     --gradient-color: linear-gradient(#33A8C7, #52E3E1, #A0E426, #FDF148, #FFAB00, #F77976, #F050AE, #D883FF, #9336FD);
 
@@ -242,67 +354,78 @@ body {
 
         /* Switch */
         .switch {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 25px;
-    width: 225px;
-    background: #252525;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-    margin-right: 20px; /* Adiciona um espaçamento entre o switch e a search bar */
-    }
-
-        .switch-label {
-            font-weight: bold;
             position: relative;
-            z-index: 2;
-            float: left;
-            width: 75px;
-            line-height: 25px;
-            font-size: 12px;
-            color: #676a6c;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .switch-input {
-            display: none;
-        }
-
-        .switch-input:checked + .switch-label {
-            color: #f0f0f0;
-            transition: 0.15s ease-out;
-            transition-property: color, text-shadow;
-            text-shadow: 0px 0px 10px black;
-        }
-
-        .switch-input:checked + .switch-label-y ~ .switch-selector {
-            transform: translateX(0%);
-            background-color: #999999;
-        }
-        .switch-input:checked + .switch-label-i ~ .switch-selector {
-            transform: translateX(100%);
-            background-color: #999999;
-        }
-        .switch-input:checked + .switch-label-n ~ .switch-selector {
-            transform: translateX(200%);
-            background-color: #999999;
-        }
-
-        .switch-selector {
-            position: absolute;
-            z-index: 1;
-            top: 0px;
-            left: 0px;
-            display: block;
-            width: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             height: 25px;
-            border-radius: 5px;
-            background-color: #1ab394;
-            transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-        }
+            width: 225px;
+            background: rgba(55, 55, 55, 0.3);
+            backdrop-filter: blur(20px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0px 0px 10px 0 rgba(0, 0, 0, 0.4);
+            margin-right: 20px; /* Adiciona um espaçamento entre o switch e a search bar */
+            }
+        
+                .switch-label {
+                    font-weight: bold;
+                    position: relative;
+                    z-index: 2;
+                    float: left;
+                    width: 75px;
+                    line-height: 25px;
+                    font-size: 12px;
+                    color: #a3a9ad;
+                    text-align: center;
+                    cursor: pointer;
+                }
+        
+                .switch-input {
+                    display: none;
+                }
+        
+                .switch-input:checked + .switch-label {
+                    color: #f0f0f0;
+                    transition: 0.15s ease-out;
+                    transition-property: color, text-shadow;
+                    text-shadow: 0px 0px 10px black;
+                }
+        
+                .switch-input:checked + .switch-label-y ~ .switch-selector {
+                    transform: translateX(0%);
+                    background: rgba(15, 15, 15, 0.7);
+                    backdrop-filter: blur(20px);
+                    box-shadow: 0 0 1px black;
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;
+                }
+                .switch-input:checked + .switch-label-i ~ .switch-selector {
+                    transform: translateX(100%);
+                    background: rgba(15, 15, 15, 0.7);
+                    backdrop-filter: blur(20px);
+                    box-shadow: 0 0 1px black;
+                }
+                .switch-input:checked + .switch-label-n ~ .switch-selector {
+                    transform: translateX(200%);
+                    background: rgba(15, 15, 15, 0.7);
+                    backdrop-filter: blur(20px);
+                    box-shadow: 0 0 1px black;
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                }
+        
+                .switch-selector {
+                    position: absolute;
+                    z-index: 1;
+                    top: 0px;
+                    left: 0px;
+                    display: block;
+                    width: 75px;
+                    height: 25px;
+                    background-color: #1ab394;
+                    transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+                }
 
         /* Search Bar */
         .search-box {
@@ -416,6 +539,7 @@ body {
 
         .website-name p {
             font-size: 20px;
+            text-shadow: 0px 0px 10px black;
         }
 
         .website-name img {

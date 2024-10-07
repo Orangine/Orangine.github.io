@@ -37,17 +37,17 @@ document.addEventListener('DOMContentLoaded', function() {
         galleryImagesContainer.innerHTML = '';
         const colorThief = new ColorThief();
         let imagesLoaded = 0;
-
+    
         images.forEach((image) => {
             const anchor = document.createElement('a');
             anchor.href = image.src;
             anchor.setAttribute('data-lightbox', 'gallery');
-
+    
             const img = document.createElement('img');
             img.src = image.thumb;
             img.alt = image.title;
             img.crossOrigin = 'Anonymous';
-
+    
             img.addEventListener('load', function() {
                 const palette = colorThief.getPalette(img, 5);
                 const calculateBrightness = (rgb) => Math.sqrt(
@@ -55,10 +55,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     0.587 * (rgb[1] * rgb[1]) +
                     0.114 * (rgb[2] * rgb[2])
                 );
-
+    
                 let brightestColor = palette[0];
                 let maxBrightness = calculateBrightness(palette[0]);
-
+    
                 for (let i = 1; i < palette.length; i++) {
                     const brightness = calculateBrightness(palette[i]);
                     if (brightness > maxBrightness) {
@@ -66,41 +66,75 @@ document.addEventListener('DOMContentLoaded', function() {
                         brightestColor = palette[i];
                     }
                 }
-
+    
                 const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
                     const hex = x.toString(16);
                     return hex.length === 1 ? '0' + hex : hex;
                 }).join('');
-
+    
                 const hexColor = rgbToHex(brightestColor[0], brightestColor[1], brightestColor[2]);
                 anchor.setAttribute('data-dominant-color', hexColor);
                 anchor.style.borderColor = hexColor;
-
+    
                 const authorStyle = getAuthorStyle(image.author);
                 anchor.setAttribute('data-title', `${image.title}<br>Por <span style="${authorStyle}">${image.author}</span>`);
-
+    
                 imagesLoaded++;
                 if (imagesLoaded === images.length) {
                     applyJustifiedGallery();
                 }
             });
-
+    
             anchor.addEventListener('click', function(event) {
                 event.preventDefault();
                 lightbox.start($(this)[0]);
             });
-
+    
             const captionDiv = document.createElement('div');
             captionDiv.classList.add('jg-caption');
-
+    
             const authorStyle = getAuthorStyle(image.author);
             captionDiv.innerHTML = `<div class="description">${image.title}<br>Por <span style="${authorStyle}">${image.author}</span></div>`;
-
+    
             anchor.appendChild(img);
             anchor.appendChild(captionDiv);
             galleryImagesContainer.appendChild(anchor);
         });
+    
+        // Após renderizar as imagens, atualizamos as cores dos círculos
+        updateCircleColors(images);
     }
+    
+    function updateCircleColors(images) {
+        const colorThief = new ColorThief();
+        const lastImage = images[0]; // A primeira imagem no array é a mais recente
+        if (lastImage) {
+            const img = new Image();
+            img.src = lastImage.src;
+            img.crossOrigin = 'Anonymous'; // Importante para o Color Thief funcionar com imagens de outras origens
+    
+            img.addEventListener('load', function() {
+                const palette = colorThief.getPalette(img, 3); // Pegamos as 3 cores mais dominantes
+    
+                // Aplica as cores dominantes aos círculos
+                if (palette.length >= 3) {
+                    document.querySelector('.circle-one').style.backgroundColor = `rgb(${palette[0][0]}, ${palette[0][1]}, ${palette[0][2]})`;
+                    document.querySelector('.circle-two').style.backgroundColor = `rgb(${palette[1][0]}, ${palette[1][1]}, ${palette[1][2]})`;
+                    document.querySelector('.circle-three').style.backgroundColor = `rgb(${palette[2][0]}, ${palette[2][1]}, ${palette[2][2]})`;
+                }
+            });
+        }
+    }
+    
+    function updateGallery() {
+        const images = fetchImagesData();
+        const filteredImages = filterImages(images);
+        renderGalleryImages(filteredImages);
+    }
+    
+    // Chama a função updateGallery para inicializar
+    updateGallery();
+    
 
     function applyJustifiedGallery() {
         $('.gallery-images').justifiedGallery({
