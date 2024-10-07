@@ -650,4 +650,145 @@ body.loading {
     margin: 10px 0;
 }
 
-    
+@media only screen and (max-width: 870px) {
+  /* Nome do Website na galeria */
+
+  .website-name p {
+      display: none;
+  }
+
+  /* Tela de carregamento */
+  .loading-content {
+    width: 90%;
+    height: auto;
+  }
+  #loading-screen img {
+    margin-top: 10px;
+    width: 75px; /* Ajuste conforme necessário */
+    height: auto;
+    margin-bottom: 10px; /* Espaçamento abaixo da logo */
+  }
+
+  /* Search Bar */
+  .search-box {
+      display: flex;
+      justify-content: flex-end; /* Alinha o botão de pesquisa à direita */
+      right: 10px; /* Mantém o botão de pesquisa a 10px da direita */
+      top: 2px;
+      width: 100%;
+  }
+
+  .input-search {
+      background-color: transparent;
+      border-radius: 25px;
+      border-style: none;
+      color: #fff;
+      font-size: 14px;
+      height: 25px;
+      letter-spacing: 2px;
+      outline: none;
+      transition: all .5s ease-in-out;
+      width: 0px; /* Inicialmente escondido */
+      margin-right: 25px;
+      text-align: center;
+      max-width: 0px; /* Inicialmente escondido */
+  }
+
+  /* Botão de pesquisa */
+  .btn-search {
+      background-color: transparent;
+      border-radius: 50%;
+      border-style: none;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: bold;
+      height: 20px;
+      outline: none;
+      width: 20px;
+      top: 3px;
+  }
+
+  .btn-search:focus ~ .input-search,
+  .btn-search.active ~ .input-search {
+      background-color: #151515;
+      border: 1px solid rgba(255, 255, 255, .5);
+      border-radius: 10px;
+      max-width: 275px; /* A largura máxima da barra de pesquisa */
+      width: 100%; /* Expande para o tamanho máximo disponível */
+      top: -2px;
+  }
+
+  .btn-search.active {
+      color: rgb(127, 216, 88); /* Escolha a cor desejada */
+      text-shadow: 0px 0px 4px #1ab394;
+  }
+
+  /* Input de pesquisa */
+  .input-search {
+      background-color: transparent;
+      border-radius: 25px;
+      border-style: none;
+      color: #fff;
+      font-size: 14px;
+      height: 25px;
+      letter-spacing: 2px;
+      outline: none;
+      transition: all .5s ease-in-out;
+      width: 0px; /* Inicialmente escondido */
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: -2px;
+  }
+
+  .input-search:focus {
+    background-color: #151515;
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: 10px;
+    max-width: 275px;
+  }
+
+  .input-search::placeholder {
+      color: rgba(255, 255, 255, .5);
+      font-size: 14px;
+      font-weight: 100;
+      letter-spacing: 2px;
+  }
+
+  .suggestions {
+      top: 30px;
+      position: absolute;
+      background: rgba(55, 55, 55, 0.5);
+      backdrop-filter: blur(20px);
+      border-radius: 10px;
+      border: none;
+      z-index: 10;
+      max-height: 200px;
+      overflow-y: auto;
+      display: none; /* Inicialmente escondido */
+      letter-spacing: 2px;
+      padding: 5px;
+      width: 275px;
+      text-shadow: 0px 0px 5px black;
+      left: 50%; /* Alinha horizontalmente ao centro */
+      transform: translateX(-50%); /* Move para o centro */
+  }
+
+  .suggestion-item {
+      cursor: pointer;
+      padding: 5px;
+  }
+
+  .suggestion-item:hover {
+      background: rgba(55, 55, 55, 0.6);
+      backdrop-filter: blur(20px);
+      color: white;
+      border-radius: 10px;
+  }
+
+  .highlight {
+      color: gray;
+  }
+}
+
