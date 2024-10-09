@@ -22,5 +22,7 @@ const images=[
     {src:"https://i.imgur.com/g3LQ7AD.jpeg",thumb:"https://i.imgur.com/vGrx5Ou.jpeg",title:"Star Wars Jedi: Survivor",author:"Orangine", date:"18-09-2024", type:"paisagem", wpp:"sim"},
     {src:"https://i.imgur.com/HaXolhy.jpeg",thumb:"https://i.imgur.com/VF4eHM1.jpeg",title:"Baldur's Gate 3",author:"Orangine", date:"25-08-2024", type:"paisagem", wpp:"sim"},
     {src:"https://i.imgur.com/4vyIsv2.jpeg",thumb:"https://i.imgur.com/VBOMnxx.jpeg",title:"Star Wars Jedi: Survivor",author:"Orangine", date:"16-09-2024", type:"paisagem", wpp:"sim"},
-    {src:"https://i.imgur.com/48qedxX.jpeg",thumb:"https://i.imgur.com/zqIyAjR.jpeg",title:"Horizon Zero Dawn",author:"Jujuba", date:"13-09-2024", type:"paisagem", wpp:"sim"}
+    {src:"https://i.imgur.com/48qedxX.jpeg",thumb:"https://i.imgur.com/zqIyAjR.jpeg",title:"Horizon Zero Dawn",author:"Jujuba", date:"13-09-2024", type:"paisagem", wpp:"sim"},
+    {src:"https://i.imgur.com/NHBLUaH.jpeg",thumb:"https://i.imgur.com/y2gyWp3.jpeg",title:"Elden Ring",author:"Jujuba", date:"21-08-2024", type:"paisagem", wpp:"não"},
+    {src:"https://i.imgur.com/Oljg6fV.jpeg",thumb:"https://i.imgur.com/Z1mXRUK.jpeg",title:"Borderlands 3",author:"Orangine", date:"07-10-2024", type:"retrato", wpp:"sim"}
 ];
