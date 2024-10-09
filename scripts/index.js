@@ -41,7 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
         images.forEach((image) => {
             const anchor = document.createElement('a');
             anchor.href = image.src;
-            anchor.setAttribute('data-lightbox', 'gallery');
+            anchor.classList.add('swipebox'); // Classe necessária para o Swipebox
+            anchor.title = `<span style="font-family: 'Roboto', sans-serif;">${image.title}</span> - Por <span style="font-family: 'Roboto', sans-serif; ${getAuthorStyle(image.author)}">${image.author}</span>`;
     
             const img = document.createElement('img');
             img.src = image.thumb;
@@ -76,32 +77,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 anchor.setAttribute('data-dominant-color', hexColor);
                 anchor.style.borderColor = hexColor;
     
-                const authorStyle = getAuthorStyle(image.author);
-                anchor.setAttribute('data-title', `${image.title}<br>Por <span style="${authorStyle}">${image.author}</span>`);
-    
                 imagesLoaded++;
                 if (imagesLoaded === images.length) {
                     applyJustifiedGallery();
                 }
             });
     
-            anchor.addEventListener('click', function(event) {
-                event.preventDefault();
-                lightbox.start($(this)[0]);
-            });
-    
             const captionDiv = document.createElement('div');
             captionDiv.classList.add('jg-caption');
     
-            const authorStyle = getAuthorStyle(image.author);
-            captionDiv.innerHTML = `<div class="description">${image.title}<br>Por <span style="${authorStyle}">${image.author}</span></div>`;
+            captionDiv.innerHTML = `<div class="description">${image.title}<br>Por <span style="${getAuthorStyle(image.author)}">${image.author}</span></div>`;
     
             anchor.appendChild(img);
             anchor.appendChild(captionDiv);
             galleryImagesContainer.appendChild(anchor);
         });
     
-        // Após renderizar as imagens, atualizamos as cores dos círculos
+        // Inicializar Swipebox após renderizar as imagens
+        $('.swipebox').swipebox();
+    
+        // Atualizar as cores dos círculos
         updateCircleColors(images);
     }
     
