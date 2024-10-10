@@ -24,5 +24,5 @@ const images=[
     {src:"https://i.imgur.com/4vyIsv2.jpeg",thumb:"https://i.imgur.com/VBOMnxx.jpeg",title:"Star Wars Jedi: Survivor",author:"Orangine", date:"16-09-2024", type:"paisagem", wpp:"sim"},
     {src:"https://i.imgur.com/48qedxX.jpeg",thumb:"https://i.imgur.com/zqIyAjR.jpeg",title:"Horizon Zero Dawn",author:"Jujuba", date:"13-09-2024", type:"paisagem", wpp:"sim"},
     {src:"https://i.imgur.com/NHBLUaH.jpeg",thumb:"https://i.imgur.com/y2gyWp3.jpeg",title:"Elden Ring",author:"Jujuba", date:"21-08-2024", type:"paisagem", wpp:"não"},
-    {src:"https://i.imgur.com/Oljg6fV.jpeg",thumb:"https://i.imgur.com/Z1mXRUK.jpeg",title:"Borderlands 3",author:"Orangine", date:"07-10-2024", type:"retrato", wpp:"sim"}
+    {src:"https://i.imgur.com/ODbKtsO.jpeg",thumb:"https://i.imgur.com/ZMoOJPD.jpeg",title:"Borderlands 3",author:"Orangine", date:"07-10-2024", type:"retrato", wpp:"sim"}
 ];
