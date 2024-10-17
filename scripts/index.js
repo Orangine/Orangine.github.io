@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
         // Atualiza o fundo com a última imagem
         if (sortedImages.length > 0) {
-            const lastImage = sortedImages[0].src; // Pega a URL da última imagem
+            const lastImage = sortedImages[0].thumb; // Pega a URL da última imagem
             document.getElementById('background-div').style.backgroundImage = `url('${lastImage}')`;
         }
     
