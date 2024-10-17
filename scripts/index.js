@@ -12,13 +12,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function fetchImagesData() {
-        return images
+        const sortedImages = images
             .map((image, index) => ({ ...image, index }))
             .sort((a, b) => {
                 const dateA = convertToDate(a.date);
                 const dateB = convertToDate(b.date);
                 return dateB - dateA || b.index - a.index;
             });
+    
+        // Atualiza o fundo com a última imagem
+        if (sortedImages.length > 0) {
+            const lastImage = sortedImages[0].src; // Pega a URL da última imagem
+            document.getElementById('background-div').style.backgroundImage = `url('${lastImage}')`;
+        }
+    
+        return sortedImages;
     }
 
     function getAuthorStyle(author) {
@@ -37,64 +45,79 @@ document.addEventListener('DOMContentLoaded', function() {
         return `#${[r, g, b].map(x => x.toString(16).padStart(2, '0')).join('')}`;
     }
 
-    function updateCircleColors(images) {
-        const lastImage = images[0];
-        if (lastImage) {
-            const img = new Image();
-            img.src = lastImage.src;
-            img.crossOrigin = 'Anonymous';
-            img.onload = function() {
-                const palette = colorThief.getPalette(img, 3);
-                document.querySelector('.circle-one').style.backgroundColor = `rgb(${palette[0].join(',')})`;
-                document.querySelector('.circle-two').style.backgroundColor = `rgb(${palette[1].join(',')})`;
-                document.querySelector('.circle-three').style.backgroundColor = `rgb(${palette[2].join(',')})`;
-            };
-        }
-    }
+    let lastClickedImage = null; // Variável para armazenar a última imagem clicada
 
-    function renderGalleryImages(images) {
-        galleryImagesContainer.innerHTML = '';
-        let imagesLoaded = 0;
+function updateCircleColors(image) {
+    if (image) {
+        const img = new Image();
+        img.src = image.src;
+        img.crossOrigin = 'Anonymous';
+        img.onload = function() {
+            const palette = colorThief.getPalette(img, 3);
+            document.querySelector('.circle-one').style.backgroundColor = `rgb(${palette[0].join(',')})`;
+            document.querySelector('.circle-two').style.backgroundColor = `rgb(${palette[1].join(',')})`;
+            document.querySelector('.circle-three').style.backgroundColor = `rgb(${palette[2].join(',')})`;
+        };
+    }
+}
+
+function renderGalleryImages(images) {
+    galleryImagesContainer.innerHTML = '';
+    let imagesLoaded = 0;
+
+    images.forEach(image => {
+        const anchor = document.createElement('a');
+        anchor.href = image.src;
+        anchor.classList.add('swipebox');
+
+        const img = document.createElement('img');
+        img.src = image.thumb;
+        img.alt = image.title;
+        img.crossOrigin = 'Anonymous';
+
+        img.onload = function() {
+            const palette = colorThief.getPalette(img, 5);
+            const brightestColor = palette.reduce((prev, curr) => {
+                return calculateBrightness(curr) > calculateBrightness(prev) ? curr : prev;
+            });
+            const hexColor = rgbToHex(...brightestColor);
+            anchor.setAttribute('data-dominant-color', hexColor);
+            anchor.style.borderColor = hexColor;
+
+            imagesLoaded++;
+            if (imagesLoaded === images.length) applyJustifiedGallery();
+        };
+
+        // Evento de clique na imagem para alterar o fundo e as cores dos círculos
+        img.onclick = function() {
+            // Atualiza o fundo do div com a imagem clicada
+            document.getElementById('background-div').style.backgroundImage = `url('${image.src}')`;
+            lastClickedImage = image; // Atualiza a última imagem clicada
+            updateCircleColors(image); // Atualiza as cores dos círculos
+        };
+
+        const captionDiv = document.createElement('div');
+        captionDiv.classList.add('jg-caption');
+        captionDiv.innerHTML = `<div class="description">${image.title}<br>Por <span style="${getAuthorStyle(image.author)}">${image.author}</span></div>`;
         
-        images.forEach(image => {
-            const anchor = document.createElement('a');
-            anchor.href = image.src;
-            anchor.classList.add('swipebox');
+        anchor.appendChild(img);
+        anchor.appendChild(captionDiv);
+        galleryImagesContainer.appendChild(anchor);
+    });
 
-            const img = document.createElement('img');
-            img.src = image.thumb;
-            img.alt = image.title;
-            img.crossOrigin = 'Anonymous';
-
-            img.onload = function() {
-                const palette = colorThief.getPalette(img, 5);
-                const brightestColor = palette.reduce((prev, curr) => {
-                    return calculateBrightness(curr) > calculateBrightness(prev) ? curr : prev;
-                });
-                const hexColor = rgbToHex(...brightestColor);
-                anchor.setAttribute('data-dominant-color', hexColor);
-                anchor.style.borderColor = hexColor;
-
-                imagesLoaded++;
-                if (imagesLoaded === images.length) applyJustifiedGallery();
-            };
-
-            const captionDiv = document.createElement('div');
-            captionDiv.classList.add('jg-caption');
-            captionDiv.innerHTML = `<div class="description">${image.title}<br>Por <span style="${getAuthorStyle(image.author)}">${image.author}</span></div>`;
-            
-            anchor.appendChild(img);
-            anchor.appendChild(captionDiv);
-            galleryImagesContainer.appendChild(anchor);
-        });
-
-        $('.swipebox').swipebox();
-        updateCircleColors(images);
+    $('.swipebox').swipebox();
+    
+    // Define a imagem de fundo como a última imagem ao carregar a galeria
+    if (images.length > 0) {
+        const initialImage = images[0];
+        document.getElementById('background-div').style.backgroundImage = `url('${initialImage.src}')`;
+        updateCircleColors(initialImage); // Atualiza as cores dos círculos com a primeira imagem
     }
+}
 
     function applyJustifiedGallery() {
         $('.gallery-images').justifiedGallery({
-            rowHeight: 275,
+            rowHeight: 250,
             margins: 10,
             lastRow: 'nojustify',
             captions: true
