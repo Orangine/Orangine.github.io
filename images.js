@@ -28,5 +28,7 @@ const images=[
     /* #0017 */ {thumb:"https://i.ibb.co/PxSpRbQ/017-STAR-WARS-Jedi-Survivor-18-09-2024.jpg",src:"https://i.ibb.co/DDNvVrt/017-STAR-WARS-Jedi-Survivor-18-09-2024.jpg",title:"Star Wars Jedi: Survivor",author:"Orangine", date:"18-09-2024", type:"paisagem", wpp:"-"},
     /* #0018 */ {thumb:"https://i.ibb.co/q5w6HSq/018-Borderlands-2-02-10-2024.jpg",src:"https://i.ibb.co/xqkhwFQ/018-Borderlands-2-02-10-2024.jpg",title:"Borderlands 2",author:"Orangine", date:"02-10-2024", type:"retrato", wpp:"-"},
     /* #0019 */ {thumb:"https://i.ibb.co/LYBHZH1/019-Borderlands-3-07-10-2024.jpg",src:"https://i.ibb.co/nqG65Mx/019-Borderlands-3-07-10-2024.jpg",title:"Borderlands 3",author:"Orangine", date:"07-10-2024", type:"retrato", wpp:"-"},
-    /* #0020 */ {thumb:"https://i.ibb.co/7zm0Htc/20-Baldur-s-Gate-3-13-10-2024.jpg",src:"https://i.ibb.co/zXWNLsL/20-Baldur-s-Gate-3-13-10-2024.jpg",title:"Baldur's Gate III",author:"Orangine", date:"13-10-2024", type:"paisagem", wpp:"-"}
+    /* #0020 */ {thumb:"https://i.ibb.co/7zm0Htc/20-Baldur-s-Gate-3-13-10-2024.jpg",src:"https://i.ibb.co/zXWNLsL/20-Baldur-s-Gate-3-13-10-2024.jpg",title:"Baldur's Gate III",author:"Orangine", date:"13-10-2024", type:"paisagem", wpp:"-"},
+    /* #0021 */ {thumb:"https://i.ibb.co/0r5GfR8/21-STAR-WARS-Jedi-Survivor-20-09-2024.jpg",src:"https://i.ibb.co/6JsD8Cm/21-STAR-WARS-Jedi-Survivor-20-09-2024.jpg",title:"Star Wars Jedi: Surivor",author:"Orangine", date:"20-09-2024", type:"paisagem", wpp:"-"},
+    /* #0022 */ {thumb:"https://i.ibb.co/XypNM2p/22-STAR-WARS-Jedi-Survivor-20-09-2024.jpg",src:"https://i.ibb.co/B4Mnqwn/22-STAR-WARS-Jedi-Survivor-20-09-2024.jpg",title:"Star Wars Jedi: Survivor",author:"Orangine", date:"20-09-2024", type:"retrato", wpp:"-"}
 ];
