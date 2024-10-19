@@ -358,7 +358,7 @@ function renderGalleryImages(images) {
             document.getElementById('loading-screen').style.display = 'none';
             document.body.classList.remove('loading');
             document.getElementById('content').style.display = 'block';
-        }, 0000);
+        }, 1500);
     }, 5000);
 
     lightbox.option({ 'albumLabel': "" });
