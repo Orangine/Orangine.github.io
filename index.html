@@ -16,6 +16,7 @@
     <!-- Custom -->
     <link rel="stylesheet" href="styles/index.css" />
     <script src="scripts/index.js"></script>
+    <script src="games.js"></script>
     <script src="images.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
@@ -41,7 +42,8 @@
           </div>
           <div class="background"></div>
         <div class="row">
-            <div class="website-name"><img src="images/Pixel Memories Logo.png" alt="Pixel Memories"><p>PIXEL MEMORIES</p></div>
+            <div class="website-name">
+            <div class="logo">PM</div>
             <div class="switch">
                 <input id="switch-y" name="filter" type="radio" value="Paisagem" class="switch-input" />
                 <label for="switch-y" class="switch-label switch-label-y">Paisagem</label>
@@ -50,17 +52,49 @@
                 <input id="switch-n" name="filter" type="radio" value="Retrato" class="switch-input" />
                 <label for="switch-n" class="switch-label switch-label-n">Retrato</label>
                 <span class="switch-selector"></span>
-            </div>
+            </div></div>
             <div class="search-box">
                 <button class="btn-search"><i class="fas fa-search"></i></button>
                 <input type="text" id="search-input" class="input-search" placeholder="Pesquise um jogo ou autor...">
-            </div>                        
+            </div> 
+            <button id="openModalBtn">Sobre</button>                       
         </div>
         <div id="suggestions" class="suggestions"></div>
         <!-- Gallery Content -->
         <div id="gallery-content" class="content-section">
             <div id="background-div"></div>
             <div class="gallery-images" id="gallery-images"></div>
+        </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <main>
+                    <section>
+                        <figure>
+                            <span id="closeModal" class="close">&times;</span>
+                            <img src="images/sm_bg.gif" alt="Background">
+                        </figure>
+                        <div class="texto">
+                            <h1>Me chamo Orangine</h1>
+                            <p>Apaixonado por jogos e por registrar cada momento épico das minhas aventuras virtuais. Cada imagem
+                              é uma memória que eu guardo com carinho e quero compartilhar com você.</p>
+                        </div>
+                        <div class="caja">
+                            <img src="images/sm_pic.jpg" alt="Pic">
+                        </div>
+                        <div class="social-icons">
+                          <a href="#" class="icon" title="Facebook">
+                              <i class="fab fa-facebook-f"></i>
+                          </a>
+                          <a href="#" class="icon" title="Twitter">
+                              <i class="fab fa-twitter"></i>
+                          </a>
+                          <a href="#" class="icon" title="Instagram">
+                              <i class="fab fa-instagram"></i>
+                          </a>
+                      </div>
+                    </section>
+                </main>
+            </div>
         </div>
     </div>
 </body>

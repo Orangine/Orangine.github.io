@@ -15,21 +15,21 @@
     --row-justify-content: center;
     --row-width: 100%;
     --row-position: relative;
-/* Circulos */
+  /* Circulos */
     --circle-border-radius: 50%;
-    --animation-duration: 30s;
+    --animation-duration: 60s;
     --animation-ease: ease;
-    --background-blur: 20px;
+    --background-blur: 10px;
     --circle-one-size: 250px;
     --circle-two-size: 150px;
     --circle-three-size: 100px;
-    --circle-one-position-top: 5%;
-    --circle-one-position-left: 5%;
+    --circle-one-position-top: 0;
+    --circle-one-position-left: 55%;
     --circle-two-position-top: 10%;
     --circle-three-position-top: 95%;
     --circle-three-position-right: -20%;
     --translate-value: -50% -50%;
-/* Galeria */
+  /* Galeria */
     --background-color: #151515;
     --border-none: none;
     --color-inactive: rgba(190, 190, 190, 1);
@@ -46,7 +46,7 @@
     --bottom-position: 10px;
     --height-after: 2px;
     --background-color-after: #fff;
-/* Justified Gallery */
+  /* Justified Gallery */
     --gallery-bg: #888888;
     --gallery-opacity: 0.1;
     --border-transparent: 2px solid transparent;
@@ -73,46 +73,41 @@
     --spinner-width: 8px;
     --spinner-height: 8px;
     --spinner-margin: 0 4px;
-/* Logo e Nome */
+  /* Logo */
     --logo-left: 10px;
-    --logo-font-size: 20px;
-    --logo-text-shadow: 0px 0px 10px black;
-    --logo-img-width: 30px;
-    --logo-img-margin-right: 5px;
-    --logo-height-auto: auto;
-/* Switch */
-    --switch-height: 25px;
+
+  /* Switch */
+    --switch-height: 29px;
     --switch-width: 225px;
-    --switch-bg: #202020;
+    --switch-bg: linear-gradient(135deg, #202020, #151515);
     --switch-border: 1px solid rgba(235, 244, 245, 0.1);
     --switch-color: #EBF4F5ff;
     --switch-color-checked: #000;
     --switch-selector-bg: linear-gradient(135deg, #EBF4F5ff, #E2ECF2ff, #D9E5EEff, #D0DDEBff, #C7D5E7ff, #BECEE4ff, #B5C6E0ff);
     --switch-selector-blur: blur(15px);
     --switch-selector-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    --switch-font-size: 12px;
+    --switch-font-size: 10px;
     --switch-spacing: 25px;
     --switch-transition: 0.3s ease-in-out;
-/* Barra de pesquisa e Sugestões */
-    --search-box-position: absolute;
-    --search-box-right: 10px;
-    --search-box-top: 0;
+  /* Barra de pesquisa e Sugestões */
+    --search-box-top: 20px;
     --input-height: 25px;
-    --input-width-expanded: 300px;
-    --input-width-collapsed: 0px;
+    --input-width-expanded: 325px;
+    --input-width-collapsed: 250px;
     --input-border: none;
     --input-font-size: 14px;
     --input-letter-spacing: 2px;
     --input-outline: none;
-    --input-border-radius-expanded: 0px;
+    --input-border-radius-expanded: 25px;
     --input-border-radius-collapsed: 25px;
-    --input-bg: transparent;
+    --input-bg: rgba(155, 155, 155, 0.1);
+    --input-bg-blur: blur(10px);
     --input-color: #fff;
-    --input-placeholder-color: rgba(255, 255, 255, 0.5);
+    --input-placeholder-color: rgba(255, 255, 255, 0.6);
     --input-placeholder-font-size: 14px;
     --input-placeholder-font-weight: 100;
     --input-transition: all 0.5s ease-in-out;
-    --input-border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    --input-border-focus: 1px solid rgba(255, 255, 255, 0.2);
     --btn-size: 20px;
     --btn-font-size: 17px;
     --btn-font-weight: bold;
@@ -120,7 +115,7 @@
     --btn-cursor: pointer;
     --btn-border-radius: 50%;
     --btn-position: absolute;
-    --btn-right: 0px;
+    --btn-right: 5px;
     --btn-color: #ffffff;
     --btn-bg: transparent;
     --btn-text-shadow: 0px 0px 4px #b31f1a;
@@ -130,22 +125,22 @@
     --suggestions-bg: rgba(55, 55, 55, 0.5);
     --suggestions-blur: blur(20px);
     --suggestions-border-radius: 10px;
-    --suggestions-border: none;
+    --suggestions-border: 1px solid rgba(255, 255, 255, 0.2);
     --suggestions-z-index: 15;
-    --suggestions-max-height: 200px;
+    --suggestions-max-height: 250px;
     --suggestions-overflow-y: auto;
     --suggestions-display: none;
     --suggestions-letter-spacing: 2px;
     --suggestions-padding: 5px;
-    --suggestions-width: 295px;
-    --suggestions-text-shadow: 0px 0px 5px black;
+    --suggestions-width: 320px;
+    --suggestions-text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
     --suggestion-item-padding: 5px;
-    --suggestion-item-hover-bg: rgba(55, 55, 55, 0.6);
+    --suggestion-item-hover-bg: linear-gradient(135deg, #EBF4F5ff, #E2ECF2ff, #D9E5EEff, #D0DDEBff, #C7D5E7ff, #BECEE4ff, #B5C6E0ff);
     --suggestion-item-hover-blur: blur(20px);
-    --suggestion-item-hover-color: white;
+    --suggestion-item-hover-color: black;
     --suggestion-item-hover-border-radius: 10px;
     --highlight-color: gray;
-/* Tela de carregamento */
+  /* Tela de carregamento */
     --loading-bg: #050505;
     --loading-z-index: 1000;
     --loading-opacity: 1;
@@ -176,7 +171,7 @@
     --gradient-animation: gradientShift 5s ease infinite;
     --image-bg-loading: url('https://i.postimg.cc/Pq8vzxy1/001-Life-is-Strange-True-Colors-21-05-2022.jpg');
   }
-/* Fim das variáveis */
+  /* Fim das variáveis */
 
 /* Configuração global */
   html {
@@ -205,25 +200,23 @@
   .row {
     top: 0;
     left: 0;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     display: flex;
     align-items: var(--row-align-items);
-    justify-content: var(--row-justify-content);
+    justify-content: center; /* Centraliza os itens na horizontal */
     width: 100vw; /* Largura da viewport */
     position: var(--row-position);
     margin-top: var(--row-margin-top);
     margin-bottom: var(--row-margin-bottom);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
     overflow: hidden; /* Para ocultar qualquer conteúdo que transborde */
-    /* From https://css.glass */
-    background: rgba(19, 19, 19, 0.7);
+    background-color: rgba(20, 20, 20, 0.75);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     border-bottom: 1px solid rgba(55, 55, 55, 0.4);
-}
-
+  }
 
 
 /* Scroll-bar */
@@ -427,7 +420,7 @@
     opacity: 0;
   }
 
-  /* Estilo inicial do caption com efeito de vidro */
+/* Estilo inicial do caption com efeito de vidro */
   .justified-gallery > a > .jg-caption,
   .justified-gallery > div > .jg-caption,
   .justified-gallery > figure > .jg-caption {
@@ -451,7 +444,7 @@
     transition: var(--caption-transition);
   }
 
-  /* Estilo do caption quando visível */
+/* Estilo do caption quando visível */
   .justified-gallery > a > .jg-caption.jg-caption-visible,
   .justified-gallery > div > .jg-caption.jg-caption-visible,
   .justified-gallery > figure > .jg-caption.jg-caption-visible {
@@ -510,28 +503,27 @@
     left: var(--logo-left);
   }
 
-  .website-name p {
-    font-size: var(--logo-font-size);
-    text-shadow: var(--logo-text-shadow);
-  }
-
-  .website-name img {
-    width: var(--logo-img-width);
-    height: var(--logo-height-auto);
-    margin-right: var(--logo-img-margin-right);
+/* Logo */
+  .logo {
+    font-weight: 700;
+    padding: 5px;
+    background: linear-gradient(135deg, #202020, #151515);
+    display: flex;
+    border-radius: 5px;
+    border: 1px solid rgba(235, 244, 245, 0.1);
+    margin-right: 2px;
+    pointer-events: none;
   }
 
 /* Switch */
   .switch {
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
     height: var(--switch-height);
     width: var(--switch-width);
     background: var(--switch-bg);
     backdrop-filter: var(--switch-selector-blur);
-    border-radius: 15px;
+    border-radius: 5px;
     border: var(--switch-border);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
     margin-right: var(--switch-spacing);
@@ -546,6 +538,7 @@
     width: calc(var(--switch-width) / 3);
     line-height: var(--switch-height);
     font-size: var(--switch-font-size);
+    text-transform: uppercase;
     color: var(--switch-color);
     text-align: center;
     cursor: pointer;
@@ -566,8 +559,8 @@
     background: var(--switch-selector-bg);
     backdrop-filter: var(--switch-selector-blur);
     box-shadow: var(--switch-selector-shadow);
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
   }
 
   .switch-input:checked + .switch-label-i ~ .switch-selector {
@@ -575,6 +568,7 @@
     background: var(--switch-selector-bg);
     backdrop-filter: var(--switch-selector-blur);
     box-shadow: var(--switch-selector-shadow);
+    border-radius: 5px;
   }
 
   .switch-input:checked + .switch-label-n ~ .switch-selector {
@@ -582,8 +576,8 @@
     background: var(--switch-selector-bg);
     backdrop-filter: var(--switch-selector-blur);
     box-shadow: var(--switch-selector-shadow);
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
 
   .switch-selector {
@@ -602,9 +596,7 @@
   .search-box {
     display: flex;
     align-items: center;
-    position: absolute;
-    right: 20px;
-    top: 15px;
+    margin: 0 auto;
   }
 
   .input-search {
@@ -617,7 +609,10 @@
     border-radius: var(--input-border-radius-collapsed);
     transition: var(--input-transition);
     background-color: var(--input-bg);
+    backdrop-filter: var(--suggestions-blur);
     color: var(--input-color);
+    border: 1px solid transparent;
+    text-align: center;
   }
 
   .input-search::placeholder {
@@ -635,8 +630,7 @@
     outline: var(--btn-outline);
     cursor: var(--btn-cursor);
     border-radius: var(--btn-border-radius);
-    position: var(--btn-position);
-    right: var(--btn-right);
+    margin-right: var(--btn-right);
     color: var(--btn-color);
     background-color: var(--btn-bg);
     pointer-events: painted;
@@ -647,43 +641,102 @@
     width: var(--input-width-expanded);
     border-radius: var(--input-border-radius-expanded);
     background-color: var(--input-bg);
-    border-bottom: var(--input-border-bottom);
+    backdrop-filter: var(--input-bg-blur);
+    border: var(--input-border-focus);
     transition: var(--input-transition);
   }
 
   .btn-search.clear-active i {
-    color: var(--btn-active-color); /* Cor do X quando ativo */
+    color: var(--btn-active-color);
     text-shadow: var(--btn-text-shadow);
   }
 
-  .suggestions {
-    top: var(--suggestions-top);
-    right: var(--suggestions-right);
-    position: var(--search-box-position);
-    background: var(--suggestions-bg);
-    backdrop-filter: var(--suggestions-blur);
-    border-radius: var(--suggestions-border-radius);
-    border: var(--suggestions-border);
-    z-index: var(--suggestions-z-index);
-    max-height: var(--suggestions-max-height);
-    overflow-y: var(--suggestions-overflow-y);
-    display: var(--suggestions-display);
-    letter-spacing: var(--suggestions-letter-spacing);
-    padding: var(--suggestions-padding);
-    width: var(--suggestions-width);
-    text-shadow: var(--suggestions-text-shadow);
-}
+    .suggestions {
+      position: absolute;
+      top: var(--suggestions-top);
+      left: calc(50% + 13px);
+      transform: translateX(-50%);
+      background: var(--suggestions-bg);
+      backdrop-filter: var(--suggestions-blur);
+      border-radius: var(--suggestions-border-radius);
+      border: var(--suggestions-border);
+      z-index: 1;
+      max-height: var(--suggestions-max-height);
+      overflow-y: var(--suggestions-overflow-y);
+      display: var(--suggestions-display);
+      letter-spacing: var(--suggestions-letter-spacing);
+      padding: var(--suggestions-padding);
+      width: var(--suggestions-width);
+      text-align: center;
+      text-shadow: var(--suggestions-text-shadow);
+  }
 
   .suggestion-item {
-    cursor: pointer;
-    padding: var(--suggestion-item-padding);
+      cursor: pointer;
+      padding: var(--suggestion-item-padding);
+      display: flex;
+      align-items: center;
+      justify-content: left;
   }
+
 
   .suggestion-item:hover {
     background: var(--suggestion-item-hover-bg);
     backdrop-filter: var(--suggestion-item-hover-blur);
     color: var(--suggestion-item-hover-color);
     border-radius: var(--suggestion-item-hover-border-radius);
+  }
+
+  .suggestion-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-weight: 300;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 10px 0;
+  }
+
+  .suggestion-divider::before {
+    content: "";
+    flex-grow: 1;
+    height: 1px;
+    margin-right: 10px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(181, 198, 224, 0.7), rgba(181, 198, 224, 0.7), rgba(255, 255, 255, 0));
+  }
+
+  .suggestion-divider::after {
+    content: "";
+    flex-grow: 1;
+    height: 1px;
+    margin-left: 10px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(181, 198, 224, 0.7), rgba(181, 198, 224, 0.7), rgba(255, 255, 255, 0));
+  }
+
+  .author-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+    padding: 2px;
+    border: 2px solid rgba(255, 255, 255, .5);
+    transition: border 0.3s;
+  }
+
+  .suggestion-item:hover .author-icon {
+      border: 2px solid rgba(0, 0, 0, 1);
+  }
+
+  .title-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(200, 200, 200, .2);
+    border-radius: 50%;
   }
 
   .highlight {
@@ -772,221 +825,269 @@
     margin: var(--loading-text-margin);
   }
 
-
-/* Telas Menores */
- /* Adaptação para telas menores */
-@media only screen and (max-width: 870px) {
-
-/* Nome do Website na galeria */
-  .website-name p {
-      display: none;
+  #background-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+    z-index: -1;
+    transition: background-image 0.5s ease-in-out;
   }
 
-  /* Tela de carregamento */
-  .loading-content {
-    width: 90%;
-    height: auto;
-  }
-  #loading-screen img {
-    margin-top: 10px;
-    width: 75px; /* Ajuste conforme necessário */
-    height: auto;
-    margin-bottom: 10px; /* Espaçamento abaixo da logo */
-  }
-
-  /* Search Bar */
-  .search-box {
-      display: flex;
-      justify-content: flex-end; /* Alinha o botão de pesquisa à direita */
-      right: 10px; /* Mantém o botão de pesquisa a 10px da direita */
-      top: 2px;
-      width: 100%;
+/* background blur */
+  .background {
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    position: fixed;
+    backdrop-filter: blur(50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
   }
 
-  .input-search {
-      background-color: transparent;
-      border-radius: 25px;
-      border-style: none;
-      color: #fff;
-      font-size: 14px;
-      height: 25px;
-      letter-spacing: 2px;
-      outline: none;
-      transition: all .5s ease-in-out;
-      width: 0px; /* Inicialmente escondido */
-      margin-right: 25px;
-      text-align: center;
-      max-width: 0px; /* Inicialmente escondido */
+  #swipebox-overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(var(--background-blur));
   }
 
-  /* Botão de pesquisa */
-  .btn-search {
-      background-color: transparent;
-      border-radius: 50%;
-      border-style: none;
-      color: #ffffff;
-      cursor: pointer;
-      font-size: 17px;
-      font-weight: bold;
-      height: 20px;
-      outline: none;
-      width: 20px;
-      top: 3px;
+  #swipebox-slider .slide img {
+    border-radius: 8px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(var(--background-blur));
   }
 
-  .btn-search:focus ~ .input-search,
-  .btn-search.active ~ .input-search {
-      background-color: #151515;
-      border: 1px solid rgba(255, 255, 255, .5);
-      border-radius: 10px;
-      max-width: 275px; /* A largura máxima da barra de pesquisa */
-      width: 100%; /* Expande para o tamanho máximo disponível */
-      top: -2px;
+  #swipebox-close {
+    color: #fff;
+    font-size: 20px;
+    right: 15px;
+    top: 10px;
+    opacity: 0.8;
   }
 
-  .btn-search.active {
-      color: rgb(127, 216, 88); /* Escolha a cor desejada */
-      text-shadow: 0px 0px 4px #1ab394;
+  #swipebox-prev, #swipebox-next {
+    color: #fff;
+    font-size: 30px;
+    opacity: 0.8;
+    text-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
   }
 
-  /* Input de pesquisa */
-  .input-search {
-      background-color: transparent;
-      border-radius: 25px;
-      border-style: none;
-      color: #fff;
-      font-size: 14px;
-      height: 25px;
-      letter-spacing: 2px;
-      outline: none;
-      transition: all .5s ease-in-out;
-      width: 0px; /* Inicialmente escondido */
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: -2px;
+  #swipebox-bottom-bar {
+    background: none;
   }
 
-  .input-search:focus {
-    background-color: #151515;
-    border: 1px solid rgba(255, 255, 255, .5);
-    border-radius: 10px;
-    max-width: 275px;
+  #swipebox-slider .slide img {
+    max-width: 91%;
+    max-height: 91%;
+    object-fit: contain;
   }
 
-  .input-search::placeholder {
-      color: rgba(255, 255, 255, .5);
-      font-size: 14px;
-      font-weight: 100;
-      letter-spacing: 2px;
+  #swipebox-arrows a {
+    background-color: transparent;
   }
 
-  .suggestions {
-      top: 30px;
-      position: absolute;
-      background: rgba(55, 55, 55, 0.5);
-      backdrop-filter: blur(20px);
-      border-radius: 10px;
-      border: none;
-      z-index: 10;
-      max-height: 200px;
-      overflow-y: auto;
-      display: none; /* Inicialmente escondido */
-      letter-spacing: 2px;
-      padding: 5px;
-      width: 275px;
-      text-shadow: 0px 0px 5px black;
-      left: 50%; /* Alinha horizontalmente ao centro */
-      transform: translateX(-50%); /* Move para o centro */
-  }
 
-  .suggestion-item {
-      cursor: pointer;
-      padding: 5px;
-  }
+/* Sobre mim */
 
-  .suggestion-item:hover {
-      background: rgba(55, 55, 55, 0.6);
-      backdrop-filter: blur(20px);
-      color: white;
-      border-radius: 10px;
-  }
-
-  .highlight {
-      color: gray;
-  }
-}
-
-#background-div {
-  position: fixed; /* Mantém a imagem fixa ao rolar */
-  top: 0;
+  .modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
   left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
-  background-size: cover; /* A imagem cobrirá todo o div */
-  background-position: center; /* Centraliza a imagem */
-  opacity: 0.5; /* Ajuste a opacidade conforme necessário */
-  z-index: -1; /* Fica atrás do conteúdo */
-  transition: background-image 0.5s ease-in-out; /* Suaviza a troca do fundo */
-}
+  background-color: rgba(0, 0, 0, 0.5);
+  }
 
-/* Background Blur */
-.background {
-  height: 100vh; /* Altura da tela */
-  width: 100vw; /* Largura da tela */
-  top: 0; /* Alinha ao topo */
-  left: 0; /* Alinha à esquerda */
-  position: fixed; /* Fixar a div na tela */
-  backdrop-filter: blur(50px); /* Aplica o desfoque de fundo */
-  display: flex; /* Para alinhar o conteúdo, se houver */
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  z-index: 0; /* Fica atrás do conteúdo */
-}
+  .modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+  }
 
-/* Modificar o fundo da lightbox */
-#swipebox-overlay {
-  background-color: rgba(0, 0, 0, 0.8); /* Alterar a cor de fundo */
-  backdrop-filter: blur(var(--background-blur));
-}
+  .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  }
 
-/* Estilizar as imagens */
-#swipebox-slider .slide img {
-  border-radius: 8px; /* Adicionar bordas arredondadas às imagens */
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5); /* Adicionar sombras */
-  backdrop-filter: blur(var(--background-blur));
-}
+  .close:hover, .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  }
 
-/* Alterar o estilo do botão de fechar */
-#swipebox-close {
+  #openModalBtn {
+  font-family: 'Roboto', sans-serif;
+  background-color: #303030;
   color: #fff;
-  font-size: 20px;
-  right: 15px;
-  top: 10px;
-  opacity: 0.8;
-}
+  border: none;
+  border-radius: 25px;
+  padding: 8px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-right: 15px;
+  }
 
-/* Customizar os ícones de navegação */
-#swipebox-prev, #swipebox-next {
-  color: #fff;
-  font-size: 30px;
-  opacity: 0.8;
-  text-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5); /* Adicionar sombras */
-}
+  #openModalBtn:hover {
+  background: linear-gradient(135deg, #EBF4F5ff, #E2ECF2ff, #D9E5EEff, #D0DDEBff, #C7D5E7ff, #BECEE4ff, #B5C6E0ff);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  color: #000;
+  }
 
-#swipebox-bottom-bar {
-  background: none;
-}
+  #openModalBtn:active {
+  background-color: #fff;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  transform: scale(0.98);
+  }
 
-/* Para ajustar o tamanho da imagem */
-#swipebox-slider .slide img {
-  max-width: 91%;  /* Reduz a largura da imagem a 80% da tela */
-  max-height: 91%; /* Reduz a altura da imagem a 80% da tela */
-  object-fit: contain; /* Mantém a proporção da imagem */
-}
+  @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
-/* Para remover o fundo preto das setas de navegação */
-#swipebox-arrows a {
-  background-color: transparent; /* Torna o fundo transparente */
-}
+  * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    --primary-font: 'Montserrat', sans-serif;
+    --size-font-title: 60px;
+    --size-font-sub-title: 24px;
+    --size-font-body: 26px;
+    --size-font-small: 18px;
+    --primary-color: #FF6347;
+    --secondary-color: #ffe29a;
+    --primary-color-background: rgba(15, 15, 15, 0.9);
+    --secondary-color-background: #C1CACB;
+    --primary-color-font: black;
+    --secondary-color-font: #F5F5F5;
+    --primary-spacing: 20px;
+    --secondary-spacing: 10px;
+    --tertiary-spacing: 5px;
+  }
 
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+  }
+
+  .modal-content {
+    background-color: transparent;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+  }
+
+  section {
+    width: 500px;
+    height: 450px;
+    box-sizing: border-box;
+    background: var(--primary-color-background);
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    position: relative;
+    border-radius: 10px;
+  }
+
+  figure {
+    grid-column: 1 / -1;
+    height: 200px;
+  }
+
+  .texto {
+    font-family: var(--primary-font);
+    position: absolute;
+    bottom: 20px;
+    left: 190px;
+    right: 20px;
+    padding: var(--primary-spacing);
+    background-color: rgba(55, 55, 55, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    color: white;
+  }
+
+  .texto h1 {
+    font-size: var(--size-font-sub-title);
+    padding-bottom: var(--primary-spacing);
+  }
+
+  .caja {
+    position: absolute;
+    top: 56%;
+    left: 20px;
+    transform: translateY(-50%);
+    width: 150px;
+    height: 150px;
+    border: 1px solid var(--primary-color);
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .caja img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .close {
+  position: absolute;
+    color: #fff;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    padding-right: 9px;
+    padding-left: 9px;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: crimson;
+    text-shadow: 0 0 10px rgb(255, 91, 124);
+    text-decoration: none;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+  }
+
+  .social-icons {
+  position: absolute;
+  bottom: 60px;
+  left: 48px;
+  justify-content: center;
+  margin-top: 20px;
+  }
+
+  .icon {
+  margin: 0 5px;
+  color: var(--primary-color);
+  font-size: 24px;
+  transition: color 0.3s;
+  }
+
+  .icon:hover {
+  color: var(--secondary-color);
+  }

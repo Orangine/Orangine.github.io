@@ -5,6 +5,34 @@ document.addEventListener('DOMContentLoaded', function() {
     const suggestionsContainer = document.getElementById('suggestions');
     const switchInputs = document.querySelectorAll('.switch-input');
     const colorThief = new ColorThief();
+    // Seleciona o modal e os elementos do botão de abrir e fechar
+    const modal = document.getElementById('myModal');
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModal = document.getElementById('closeModal');
+
+    // Abre o modal quando o botão é clicado
+    openModalBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+    });
+
+    // Fecha o modal quando o "X" é clicado
+    closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+    });
+
+    // Fecha o modal quando clica fora da área do modal
+    window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+    });
+
+    // Fecha o modal quando a tecla ESC é pressionada
+    document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        modal.style.display = 'none';
+    }
+    });
 
     function convertToDate(dateString) {
         const [day, month, year] = dateString.split('-');
@@ -232,25 +260,40 @@ function renderGalleryImages(images) {
         const searchTerm = searchInput.value.toLowerCase().trim();
         const searchButton = document.querySelector('.btn-search'); 
         searchButton.classList.toggle('active', searchTerm !== '');
-
+    
         if (searchTerm === '') {
             updateGallery();
             suggestionsContainer.innerHTML = '';
             suggestionsContainer.style.display = 'none';
             return;
         }
-
+    
         suggestionsContainer.innerHTML = '';
         const uniqueTitles = new Set();
         const uniqueAuthors = new Set();
         const lastWord = searchTerm.split(' ').pop();
-
+    
         images.forEach(image => {
+            // Sugestões para autores
             if (image.author.toLowerCase().includes(lastWord) && !uniqueAuthors.has(image.author)) {
+                if (uniqueAuthors.size === 0) {
+                    // Adiciona divisor de autores
+                    const authorDivider = document.createElement('div');
+                    authorDivider.classList.add('suggestion-divider');
+                    authorDivider.innerHTML = '<strong> Autores </strong>';
+                    suggestionsContainer.appendChild(authorDivider);
+                }
+    
                 uniqueAuthors.add(image.author);
                 const suggestionItem = document.createElement('div');
                 suggestionItem.classList.add('suggestion-item');
-                suggestionItem.innerHTML = `<i>Autor:</i> <span style="${getAuthorStyle(image.author)}">${image.author}</span>`;
+    
+                // Verifica se existe uma imagem associada ao autor
+                const authorImage = titleImages[image.author.toLowerCase()] 
+                    ? `<img src="${titleImages[image.author.toLowerCase()]}" alt="${image.author}" class="author-icon">` 
+                    : '<i class="fas fa-user author-icon"></i>'; 
+    
+                suggestionItem.innerHTML = `${authorImage} <span style="${getAuthorStyle(image.author)}">${image.author}</span>`;
                 suggestionItem.addEventListener('click', () => {
                     searchInput.value = image.author;
                     suggestionsContainer.innerHTML = '';
@@ -260,13 +303,34 @@ function renderGalleryImages(images) {
                 suggestionsContainer.appendChild(suggestionItem);
             }
         });
-
-        images.forEach(image => {
-            if (image.title.toLowerCase().includes(lastWord) && !uniqueTitles.has(image.title)) {
+    
+        // Ordenar títulos em ordem alfabética
+        const sortedImagesByTitle = images
+            .filter(image => image.title.toLowerCase().includes(lastWord))
+            .sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
+    
+        // Nova seção para sugestões de títulos
+        sortedImagesByTitle.forEach(image => {
+            // Sugestões para títulos
+            if (!uniqueTitles.has(image.title)) {
+                if (uniqueTitles.size === 0) {
+                    // Adiciona divisor de jogos
+                    const titleDivider = document.createElement('div');
+                    titleDivider.classList.add('suggestion-divider');
+                    titleDivider.innerHTML = '<strong> Jogos </strong>';
+                    suggestionsContainer.appendChild(titleDivider);
+                }
+    
                 uniqueTitles.add(image.title);
                 const suggestionItem = document.createElement('div');
                 suggestionItem.classList.add('suggestion-item');
-                suggestionItem.innerHTML = `${image.title}`;
+    
+                // Verifica se existe uma imagem associada ao título
+                const titleImage = titleImages[image.title.toLowerCase()] 
+                    ? `<img src="${titleImages[image.title.toLowerCase()]}" alt="${image.title}" class="title-icon">` 
+                    : '<i class="fas fa-image title-icon"></i>'; 
+    
+                suggestionItem.innerHTML = `${titleImage} ${image.title}`;
                 suggestionItem.addEventListener('click', () => {
                     searchInput.value = image.title;
                     suggestionsContainer.innerHTML = '';
@@ -276,9 +340,11 @@ function renderGalleryImages(images) {
                 suggestionsContainer.appendChild(suggestionItem);
             }
         });
-
+    
         suggestionsContainer.style.display = uniqueTitles.size || uniqueAuthors.size ? 'block' : 'none';
     });
+    
+    
 
     switchInputs.forEach(input => input.addEventListener('change', updateGallery));
 
@@ -292,8 +358,8 @@ function renderGalleryImages(images) {
             document.getElementById('loading-screen').style.display = 'none';
             document.body.classList.remove('loading');
             document.getElementById('content').style.display = 'block';
-        }, 1000);
-    }, 4000);
+        }, 0000);
+    }, 5000);
 
     lightbox.option({ 'albumLabel': "" });
 });
