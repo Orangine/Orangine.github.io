@@ -10,7 +10,7 @@ const images=[
 
     /* Orangine */
     /* #0001 */ {thumb:"https://i.ibb.co/MfZPfwm/001-Life-is-Strange-True-Colors-21-05-2022.jpg",src:"https://i.ibb.co/xj5WSrf/001-Life-is-Strange-True-Colors-21-05-2022.jpg",title:"Life is Strange: True Colors",author:"Orangine", date:"21-05-2022", type:"paisagem", wpp:"-"},
-    /* #0002 */ {thumb:"https://i.ibb.co/YR9nk5f/002-Red-Dead-Redemption-2-06-03-2023.jpg",src:"https://i.ibb.co/T1RPMfH/002-Red-Dead-Redemption-2-06-03-2023.jpg",title:"Red Dead Redemption 2",author:"Orangine", date:"06-03-2023", type:"paisagem", wpp:"-"},
+    /* #0002 */ {thumb:"https://i.ibb.co/YR9nk5f/002-Red-Dead-Redemption-2-06-03-2023.jpg",src:"https://i.ibb.co/T1RPMfH/002-Red-Dead-Redemption-2-06-03-2023.jpg",title:"Red Dead Redemption 2",author:"Orangine", date:"06-03-2023", type:"retrato", wpp:"-"},
     /* #0003 */ {thumb:"https://i.ibb.co/M7yJGR4/003-Baldur-s-Gate-3-09-05-2024.jpg",src:"https://i.ibb.co/Ksyd9cR/003-Baldur-s-Gate-3-09-05-2024.jpg",title:"Baldur's Gate III",author:"Orangine", date:"09-05-2024", type:"retrato", wpp:"-"},
     /* #0004 */ {thumb:"https://i.ibb.co/XzSf82z/004-Deep-Rock-Galactic-19-06-2024.jpg",src:"https://i.ibb.co/pyBjpvR/004-Deep-Rock-Galactic-19-06-2024.jpg",title:"Deep Rock Galactic",author:"Orangine", date:"19-06-2024", type:"paisagem", wpp:"-"},
     /* #0005 */ {thumb:"https://i.ibb.co/7Vh2h3b/005-The-First-Descendant-15-07-2024.jpg",src:"https://i.ibb.co/Ssynpw2/005-The-First-Descendant-15-07-2024.jpg",title:"The First Descendant",author:"Orangine", date:"15-07-2024", type:"paisagem", wpp:"-"},
