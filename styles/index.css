@@ -7,7 +7,7 @@
     --scrollbar-width: 7px;
     --scrollbar-thumb-bg: rgba(55, 55, 55, 0.5);
     --scrollbar-thumb-border-radius: 10px;
-    --main-content-margin-right: 10px;
+    --main-content-margin-right: 0px;
     --main-content-box-sizing: border-box;
     --row-margin-top: 0px;
     --row-margin-bottom: 0px;
@@ -205,7 +205,7 @@
     display: flex;
     align-items: var(--row-align-items);
     justify-content: center; /* Centraliza os itens na horizontal */
-    width: 100vw; /* Largura da viewport */
+    width: 100%; /* Largura da viewport */
     position: var(--row-position);
     margin-top: var(--row-margin-top);
     margin-bottom: var(--row-margin-bottom);
@@ -609,7 +609,6 @@
     border-radius: var(--input-border-radius-collapsed);
     transition: var(--input-transition);
     background-color: var(--input-bg);
-    backdrop-filter: var(--suggestions-blur);
     color: var(--input-color);
     border: 1px solid transparent;
     text-align: center;
